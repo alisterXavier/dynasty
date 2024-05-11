@@ -1,0 +1,86 @@
+[
+  {
+    "title": "1 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 1,
+      "price": "1,290,000",
+      "guest": 0
+    },
+    "image": "/images/creek.webp"
+  },
+  {
+    "title": "3 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 1,
+      "price": "1,290,000",
+      "guest": 0
+    },
+    "image": "/images/creek.webp"
+  },
+  {
+    "title": "3 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 1,
+      "price": "1,290,000",
+      "guest": 0
+    },
+    "image": "/images/creek.webp"
+  },
+  {
+    "title": "3 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 1,
+      "price": "1,290,000",
+      "guest": 0
+    },
+    "image": "/images/creek.webp"
+  },
+  {
+    "title": "3 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 0,
+      "price": "1,000,000",
+      "guest": 1
+    },
+    "image": "/images/creek.webp"
+  },
+  {
+    "title": "3 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 1,
+      "price": "1,290,000",
+      "guest": 1
+    },
+    "image": "/images/creek.webp"
+  },
+  {
+    "title": "3 Bedroom Apartments Cedar Creek Beach",
+    "address": "Dubai Creek, Dubai, United Arab Emirates Dubai  Dubai",
+    "details": {
+      "bedroom": 1,
+      "bath": 1,
+      "garage": 1,
+      "price": "1,290,000",
+      "guest": 1
+    },
+    "image": "/images/creek.webp"
+  }
+]
