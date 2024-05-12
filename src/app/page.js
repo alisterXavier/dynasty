@@ -1075,9 +1075,12 @@ const HeroSection = () => {
 
 export default function Home() {
   return (
-    <main className="dynasty-real-estate">
-      <Navbar />
-      <HeroSection />
+    <main className="dynasty-real-estate w-screen">
+      <h2 className='text-7xl'>
+        HEllo
+      </h2>
+      {/* <Navbar /> */}
+      {/* <HeroSection /> */}
       {/* <Properties />
       <AboutSection />
       <AwardWinning />
