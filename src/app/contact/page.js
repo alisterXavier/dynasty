@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import { Footer, Navbar } from '../page';
+// import { Footer, Navbar } from '../page';
 import React from 'react';
 import { Label } from '@/src/components/label';
 import { Input, TextArea } from '@/src/components/input';
@@ -93,12 +93,12 @@ const Contact = () => {
   useEffect(() => {}, []);
   return (
     <div className="contact">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex mt-[15vh] p-10">
         <SignupFormDemo />
         <Map />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
