@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <ReactLenis
           root
-          options={{ lerp: 0.04, duration: 0.05, syncTouch: true }}
+          options={{ lerp: 0.4, duration: 0.05, syncTouch: true }}
         >
           {children}
         </ReactLenis>
