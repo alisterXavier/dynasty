@@ -15,7 +15,10 @@ const transition = {
 
 export const MenuItem = ({ setActive, active, item, children }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative">
+    <div
+      onMouseEnter={() => setActive(item)}
+      className="relative flex items-center justify-center px-5"
+    >
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer hover:opacity-[0.9] text-white"
@@ -54,7 +57,7 @@ export const Menu = ({ setActive, children }) => {
   return (
     <nav
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full boder bg-[#13131a5f] border-transparent backdrop-blur-lg shadow-input flex justify-center space-x-4 px-8 py-4"
+      className="relative bg-darkButNotBlack border-transparent flex items-center justify-start space-x-4 px-8 py-4"
     >
       {children}
     </nav>
@@ -72,12 +75,8 @@ export const ProductItem = ({ title, description, href, src }) => {
         className="flex-shrink-0 shadow-2xl"
       />
       <div>
-        <h4 className="text-xl font-bold mb-1 text-white">
-          {title}
-        </h4>
-        <p className="text-sm max-w-[10rem] text-neutral-300">
-          {description}
-        </p>
+        <h4 className="text-xl font-bold mb-1 text-white">{title}</h4>
+        <p className="text-sm max-w-[8rem] text-neutral-300">{description}</p>
       </div>
     </Link>
   );
@@ -85,10 +84,7 @@ export const ProductItem = ({ title, description, href, src }) => {
 
 export const HoveredLink = ({ children, ...rest }) => {
   return (
-    <Link
-      {...rest}
-      className="text-neutral-200 hover:text-gray-500"
-    >
+    <Link {...rest} className="text-neutral-200 hover:text-gray-500">
       {children}
     </Link>
   );

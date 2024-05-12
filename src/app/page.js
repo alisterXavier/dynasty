@@ -1,10 +1,11 @@
 'use client';
 import Image from 'next/image';
 import staff from '@/public/images/staff-group-photo-enhanced.webp';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/utils/cn';
 import { BentoGridItem } from '../components/cards';
+import { StaggerPara, StaggerText } from '../components/textStagger';
 import {
   IconChevronLeft,
   IconChevronRight,
@@ -18,9 +19,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { HoveredLink, Menu, MenuItem, ProductItem } from '../components/navbar';
 import canal from '@/public/images/bg/IMG-20240505-WA0005.jpg';
+import logo from '@/public/images/logo/DYNASTY_WHITE.png';
 import { gsap } from 'gsap';
 import SplitType from 'split-type';
-import { CldImage } from 'next-cloudinary';
 
 const adv = [
   {
@@ -42,18 +43,31 @@ const adv = [
 ];
 const testimonials = [
   {
-    name: 'Typewriter',
-    para: "Working with Dynasty has been an absolute pleasure. Their team's dedication, professionalism, and expertise made our home buying experience seamless and stress-free. From understanding our needs to finding the perfect property and guiding us through the entire process, they provided exceptional service every step of the way. Their attention to detail, market knowledge, and commitment to client satisfaction truly set them apart. We couldn't be happier with our decision to trust Dynasty with our real estate needs and highly recommend them to anyone in search of their dream home.",
+    name: 'zühtü aşık',
+    para: 'It was best move-in experience that I have ever with support of Dynasty Real Estate thanks especially to Sachin. I have moved couple of countries and Sachin provide excellent service with very professional approach not only during rent but also some other registration process. Your service and help is really appreciated!',
   },
   {
-    name: 'Typewriter',
-    para: "Working with Dynasty has been an absolute pleasure. Their team's dedication, professionalism, and expertise made our home buying experience seamless and stress-free. From understanding our needs to finding the perfect property and guiding us through the entire process, they provided exceptional service every step of the way. Their attention to detail, market knowledge, and commitment to client satisfaction truly set them apart. We couldn't be happier with our decision to trust Dynasty with our real estate needs and highly recommend them to anyone in search of their dream home.",
+    name: 'ghazal saad',
+    para: 'I will like to endorse Sachin, I meet him in TSC over a property open day and was looking for an agent who can help me with finding a right tenant, not only he managed to close the deal with in a week but the way he managed the process seamlessly end to end was outstanding. His wealth of knowledge helped both the parties in this transition and for sure he knows what it takes. Kudos Sachin and look forward for more collaboration and partnership in future and thanks once again for your support. You are a star!',
   },
   {
-    name: 'Typewriter',
-    para: "Working with Dynasty has been an absolute pleasure. Their team's dedication, professionalism, and expertise made our home buying experience seamless and stress-free. From understanding our needs to finding the perfect property and guiding us through the entire process, they provided exceptional service every step of the way. Their attention to detail, market knowledge, and commitment to client satisfaction truly set them apart. We couldn't be happier with our decision to trust Dynasty with our real estate needs and highly recommend them to anyone in search of their dream home.",
+    name: 'Shukhrat Kholmatov',
+    para: 'I would like to share my impression about Sunny, an employee of the Dynasty Real Estate. He is very responsible, erudite and subtle in details. He helped to purchase real estate at the best price, accompanying to the end of the transaction. I recommend it to anyone who wants to receive a service in the highest quality.',
+  },
+  {
+    name: 'Unknown',
+    para: 'I cannot speak highly enough of my experience with Sameer. Throughout the process, he was incredibly responsive & proactive. He promptly answered all my questions, negotiated terms with the landlord on my behalf, and ensured that the entire process went smoothly from start to finish.',
+  },
+  {
+    name: 'Mohamed Esmail',
+    para: 'Dealt with Alisha She was very quick and professional Selling my property was very easy as she took care of everything for me.',
+  },
+  {
+    name: '',
+    para: 'I really liked working with Inga. She helped in renting our property. She has high morals and is a professional. I would wish her all the success.',
   },
 ];
+
 const partners = [
   '/images/deyaar.png',
   '/images/damac.png',
@@ -65,23 +79,6 @@ const partners = [
   '/images/sobha.png',
 ];
 
-const defaultAnimtion = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-    transition: {
-      duration: 0.5,
-    },
-  },
-
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
 const vids = [
   'https://res.cloudinary.com/dboza0n1a/video/upload/v1715441303/aerial-view-of-dubai-expo-2020-united-arab-emirat-2022-08-10-11-55-18-utc_2_mija1p.mp4',
   'https://res.cloudinary.com/dboza0n1a/video/upload/v1715440849/aerial-view-of-sheikh-zayed-road-dubai-united-ar-2022-08-10-10-11-31-utc_1_patftm.mp4',
@@ -95,29 +92,59 @@ export const Navbar = ({ className }) => {
   return (
     <div
       className={cn(
-        'fixed top-5 inset-x-0 max-w-2xl mx-auto z-50 backdrop-blur-sm',
+        'fixed top-0 inset-x-0 max-w-full ml-auto z-50 backdrop-blur-sm',
         className
       )}
     >
       <Menu setActive={setActive}>
-        <MenuItem setActive={setActive} active={active} item="Home">
+        <div className="relative w-[50px] h-[50px]">
+          <HoveredLink href="/">
+            <figure className="absolute w-[50px] h-[50px]">
+              <Image alt fill src={logo} />
+            </figure>
+          </HoveredLink>
+        </div>
+        {/* <MenuItem setActive={setActive} active={active} item="Home">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="#">Home</HoveredLink>
           </div>
-        </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Properties">
-          <div className="  text-sm grid grid-cols-2 gap-10 p-4">
-            <ProductItem title="Type" href="#" src="" description="Type" />
-            <ProductItem title="Writer" href="#" src="" description="Writer" />
-            <ProductItem title="101" href="#" src="" description="101" />
-            <ProductItem title="404" href="#" src="" description="404" />
-          </div>
-        </MenuItem>
+        </MenuItem> */}
+        <Link className="text-offwhite p-4" href={'/'}>
+          Home
+        </Link>
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="#">Our Team</HoveredLink>
+            <HoveredLink href="/team">Our Team</HoveredLink>
             <HoveredLink href="/contact">Contact</HoveredLink>
-            <HoveredLink href="#">About Us</HoveredLink>
+            <HoveredLink href="/about">About Us</HoveredLink>
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Properties">
+          <div className="  text-sm grid grid-cols-2 gap-5 p-4">
+            <ProductItem
+              title="Luxury"
+              href="/properties?type=luxury"
+              src=""
+              description="Indulge in Spacious Apartments & Private Villas."
+            />
+            <ProductItem
+              title="Apartments"
+              href="/properties?type=apartments"
+              src=""
+              description="Own Your Dream Home Before It's Built."
+            />
+            <ProductItem
+              title="Villas"
+              href="/properties?type=villas"
+              src=""
+              description="Unwind in Luxury with Ample Room."
+            />
+            <ProductItem
+              title="Off-Plans"
+              href="/properties?type=off-plans"
+              src=""
+              description="Experience Ultimate Luxury & Exclusivity."
+            />
           </div>
         </MenuItem>
       </Menu>
@@ -127,13 +154,6 @@ export const Navbar = ({ className }) => {
 
 const HeroSection = () => {
   const ref = useRef();
-  // const { scrollYProgress } = useScroll({
-  //   target: ref,
-  //   offset: ['start start', 'end start'],
-  // });
-  // const scale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
-  // const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  // const translateX = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const [vid, setVid] = useState();
 
   useEffect(() => {
@@ -227,7 +247,7 @@ const HeroSection = () => {
               DYNASTY
             </h2>
             <div className="relative w-fit overflow-hidden">
-              <h2 className="hero-dynasty-sub-title w-fit whitespace-nowrap revamp-font-titi text-xs text-1xl text-white opacity-0">
+              <h2 className="hero-dynasty-sub-title w-fit whitespace-nowrap revamp-font-titi text-xs md:text-lg text-white opacity-0">
                 Real Estate
               </h2>
               <span className="hero-sub-title-cover absolute bg-white w-full h-full left-0 top-0 -translate-x-[100%]" />
@@ -269,7 +289,7 @@ const Properties = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col justify-center items-center z-[2] h-[80vh] bg-dark">
+    <div className="relative flex flex-col justify-center items-center z-[2] h-screen md:h-[80vh] bg-darkButNotBlack">
       <div className="bg-gradient-to-t from-[#13131a] from-[80%] absolute -top-20 left-0 right-0 bottom-[50%] z-1"></div>
       <h1 className="text-white revamp-font-titi text-[30px] mb-10">
         View Listings
@@ -319,7 +339,10 @@ const Properties = () => {
       </Swiper>
       <ButtonGroup />
       <div className="w-full flex">
-        <Link href="" className="text-white ml-auto mr-[5%] hover:underline">
+        <Link
+          href="/properties"
+          className="text-white ml-auto mr-[5%] hover:underline"
+        >
           See All Listings
         </Link>
       </div>
@@ -328,87 +351,55 @@ const Properties = () => {
 };
 
 const AboutSection = () => {
-  const ref = useRef();
-  const inView = useInView(ref, {
-    amount: 0.7,
-    once: true,
-  });
-
-  const Title = () => {
-    return (
-      <motion.h1
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        className="md:text-5xl text-2xl text-black revamp-font-optima flex overflow-hidden"
-        transition={{
-          staggerChildren: 0.03,
-        }}
-      >
-        {'Discover Our Uniqueness'.split(' ').map((item, key) => {
-          return (
-            <span key={key} className="mr-3 flex">
-              {item.split('').map((it, ke) => {
-                return (
-                  <motion.span
-                    key={ke}
-                    variants={defaultAnimtion}
-                    className="inline-block"
-                  >
-                    {it}
-                  </motion.span>
-                );
-              })}
-            </span>
-          );
-        })}
-      </motion.h1>
+  useEffect(() => {
+    gsap.fromTo(
+      '.slide-image',
+      {
+        x: '-100%',
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.9,
+        scrollTrigger: {
+          trigger: '.abt-section',
+          start: '60% bottom',
+          ease: 'power4.out',
+        },
+      }
     );
-  };
-
+  }, []);
   return (
-    <div
-      className="w-screen min-h-screen p-10 flex flex-wrap items-center bg-offwhite"
-      ref={ref}
-    >
+    <div className="abt-section w-screen min-h-screen p-10 flex flex-wrap items-center bg-offwhite">
       <div className="md:w-[50%] w-full h-[100%] flex items-center justify-center">
-        <motion.figure
-          className="relative w-full h-[200px] md:w-[600px] md:h-[400px]"
-          initial={{
-            translateX: '-100px',
-            opacity: 0,
-          }}
-          whileInView={{
-            translateX: 0,
-            opacity: 1,
-          }}
-          transition={{
-            type: 'tween',
-          }}
-          viewport={{
-            amount: 0.7,
-            once: true,
-          }}
-        >
+        <figure className="slide-image relative w-full h-[200px] md:w-[600px] md:h-[400px]">
           <Image src={staff} alt="sad" fill sizes="100%" />
-        </motion.figure>
+        </figure>
       </div>
       <div className="md:w-[50%] w-full flex justify-center items-center">
         <div className=" md:w-[80%] flex flex-col justify-center items-center">
           <div className="w-full">
-            <Title></Title>
+            <StaggerText>
+              <h1 className="stagger-text md:text-4xl text-2xl text-black revamp-font-optima flex overflow-hidden">
+                Discover Our Uniqueness
+              </h1>
+            </StaggerText>
           </div>
           <div className="flex flex-col justify-center w-full">
-            <p className="md:text-[16px] text-[13px] w-[100%] text-black revamp-font-titi">
-              With a distinguished presence spanning over 5 years in the UAE
-              Real Estate market, Dynasty Real Estate stands as a foremost
-              brokerage firm in Dubai. Our esteemed standing is a testament to
-              our unwavering dedication and the favorable results we
-              consistently deliver to our clients, facilitated by a team of
-              highly skilled, professional, and multilingual real estate agents.
-              While initially excelling in the off-plan, resale, and rental
-              sectors, Dynasty Real Estate has since evolved and broadened its
-              scope.
-            </p>
+            <StaggerPara>
+              <p className="stagger-para md:text-[16px] text-[13px] w-[100%] text-black revamp-font-titi overflow-hidden">
+                With a distinguished presence spanning over 5 years in the UAE
+                Real Estate market, Dynasty Real Estate stands as a foremost
+                brokerage firm in Dubai. Our esteemed standing is a testament to
+                our unwavering dedication and the favorable results we
+                consistently deliver to our clients, facilitated by a team of
+                highly skilled, professional, and multilingual real estate
+                agents. While initially excelling in the off-plan, resale, and
+                rental sectors, Dynasty Real Estate has since evolved and
+                broadened its scope.
+              </p>
+            </StaggerPara>
           </div>
           <div className="w-full my-5">
             <button className="md:text-[16px] text-[13px] px-8 py-2 bg-blue-500 text-white revamp-font-titi transition duration-200 hover:bg-white hover:text-black border-[1px] border-transparent hover:border-blue-500">
@@ -452,7 +443,7 @@ const AwardWinning = () => {
         <Image src={canal} alt="" fill objectFit="cover" />
       </figure>
       <div className="relative flex flex-col items-center justify-center z-1 backdrop-blur-[2px] p-5 rounded-md">
-        <h1 className="md:text-5xl text-1xl revamp-font-optima text-white">
+        <h1 className="md:text-4xl text-1xl revamp-font-optima text-white">
           Award Winning Real Estate Agency
         </h1>
 
@@ -468,7 +459,7 @@ const Testimonials = () => {
   return (
     <div className="revamp-font-optima h-[70vh] bg-[#13131a] text-white flex flex-col items-center justify-center">
       <div className="my-5">
-        <h1 className="revamp-font-optima md:text-5xl text-2xl">
+        <h1 className="revamp-font-optima md:text-4xl text-2xl">
           Testimonials
         </h1>
       </div>
@@ -651,7 +642,7 @@ const Contact = () => {
         <div className="dynasty-contact-inside relative h-[60%] w-[80%] bg-offwhite">
           <div className="m-5 h-full flex flex-col justify-center">
             <div>
-              <h1 className="revamp-font-optima text-[25px] md:text-[30px] overflow-hidden">
+              <h1 className="revamp-font-optima text-[25px] md:text-4xl overflow-hidden">
                 Ready To Find Your Dream Property?
               </h1>
             </div>
@@ -874,7 +865,7 @@ const Partners = () => {
   return (
     <div className="h-[30vh] md:h-[50vh] w-full flex flex-col items-center justify-center p-5 bg-offwhite">
       <div className="w-[80%] h-full flex flex-col items-center justify-center">
-        <h1 className="revamp-font-optima md:text-5xl text-2xl">
+        <h1 className="revamp-font-optima md:text-4xl text-2xl">
           OUR PARTNERS
         </h1>
         <p className="revamp-font-titi md:text-[16px] text-[13px]">
@@ -966,7 +957,7 @@ export const Footer = () => {
           </div>
 
           <div className="md:w-[50%] w-full h-[100%] my-5">
-            <h1 className="text-[20px] revamp-font-optima text-white">
+            <h1 className="text-[20px] my-5 revamp-font-optima text-white">
               Motor City Branch
             </h1>
             <div className="h-[90%] flex flex-col justify-evenly">
@@ -998,14 +989,14 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col md:my-0 my-5  md:w-[20%] h-[100%]">
-          <div>
-            <h1 className="text-[20px] text-white revamp-font-optima">
+          <div className="my-5">
+            <h1 className="text-[20px] text-white revamp-font-optima my-5">
               Explore
             </h1>
           </div>
           <div className="flex flex-col">
             <motion.a
-              href=""
+              href="/about"
               className="
               md:text-[16px] text-[13px]
                       block py-2 w-[200px] cursor-pointer hover:ml-2 transition-all
@@ -1015,17 +1006,17 @@ export const Footer = () => {
               About
             </motion.a>
             <motion.a
-              href=""
+              href="/properties"
               className="
               md:text-[16px] text-[13px]
                       block py-2 w-[200px] cursor-pointer hover:ml-2 transition-all
                       after:block after:content-[''] after:w-[0px] after:bg-white after:bottom-0 after:left-0 after:h-[1px] hover:after:w-[200px] after:transition-all
                       after:duration-200 text-white revamp-font-optima text-sm"
             >
-              Apartments
+              Properties
             </motion.a>
             <motion.a
-              href=""
+              href="/services"
               className="
               md:text-[16px] text-[13px]
                       block py-2 w-[200px] cursor-pointer hover:ml-2 transition-all
@@ -1035,17 +1026,7 @@ export const Footer = () => {
               Our Services
             </motion.a>
             <motion.a
-              href=""
-              className="
-              md:text-[16px] text-[13px]
-                      block py-2 w-[200px] cursor-pointer hover:ml-2 transition-all
-                      after:block after:content-[''] after:w-[0px] after:bg-white after:bottom-0 after:left-0 after:h-[1px] hover:after:w-[200px] after:transition-all
-                      after:duration-200 text-white revamp-font-optima text-sm"
-            >
-              Blog
-            </motion.a>
-            <motion.a
-              href=""
+              href="/team"
               className="
               md:text-[16px] text-[13px]
                       block py-2 w-[200px] cursor-pointer hover:ml-2 transition-all
@@ -1055,7 +1036,7 @@ export const Footer = () => {
               Team
             </motion.a>
             <motion.a
-              href=""
+              href="/contact"
               className="
               md:text-[16px] text-[13px]
                       block py-2 w-[200px] cursor-pointer hover:ml-2 transition-all
@@ -1074,7 +1055,6 @@ export const Footer = () => {
 export default function Home() {
   return (
     <main className="dynasty-real-estate">
-      {/* <Navbar /> */}
       <HeroSection />
       <Properties />
       <AboutSection />
@@ -1082,7 +1062,6 @@ export default function Home() {
       <Testimonials />
       <Contact />
       <Partners />
-      <Footer />
       {/* <Advantages /> */}
     </main>
   );

@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Observer } from 'gsap/Observer';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import { Footer, Navbar } from './page';
 
 gsap.registerPlugin(ScrollTrigger, Observer, ScrollToPlugin, MotionPathPlugin);
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
           root
           options={{ lerp: 0.4, duration: 0.05, syncTouch: true }}
         >
+          <Navbar />
           {children}
+          <Footer />
         </ReactLenis>
       </body>
     </html>

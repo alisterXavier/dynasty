@@ -1,6 +1,7 @@
 const Team = () => {
   return (
-  <div>
+  <div className="min-h-screen">
+    
     TEAM
 </div>)
 };
