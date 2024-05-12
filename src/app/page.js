@@ -211,7 +211,7 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-screen h-screen z-[1] overflow-hidden" ref={ref}>
-      {/* <video
+      <video
         autoPlay
         loop
         muted
@@ -219,7 +219,7 @@ const HeroSection = () => {
         className="object-cover hero-dynasty-video bg-black w-screen h-[110vh]"
       >
         {vid && <source src={vid}></source>}
-      </video> */}
+      </video>
       <div className="overlay bg-[#1a1a1a6c] absolute top-0 w-screen h-[120vh] flex justify-center items-center">
         <div className="absolute top-[45%] right-[50%] translate-x-[50%] -translate-y-[50%]">
           <div className=" flex items-end hero-title-container">
@@ -1075,10 +1075,9 @@ const HeroSection = () => {
 
 export default function Home() {
   return (
-    <main className="dynasty-real-estate w-screen">
-      <h2 className="text-7xl">HEllo</h2>
-      {/* <Navbar /> */}
-      {/* <HeroSection /> */}
+    <main className="dynasty-real-estate">
+      <Navbar />
+      <HeroSection />
       {/* <Properties />
       <AboutSection />
       <AwardWinning />
