@@ -56,3 +56,7 @@
     text-wrap: balance;
   }
 }
+
+body,html {
+  max-width: 100vw
+}
