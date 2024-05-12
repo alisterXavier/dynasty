@@ -1,5 +1,5 @@
-import { useScroll, motion, MotionValue, useTransform } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useScroll, motion, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const text =
   'With a distinguished presence spanning over 5 years in the UAE Real Estate market, Dynasty Real Estate stands as a foremost brokerage firm in Dubai. Our esteemed standing is a testament to our unwavering dedication and the favorable results we consistently deliver to our clients, facilitated by a team of highly skilled, professional, and multilingual real estate agents. While initially excelling in the off-plan, resale, and rental sectors, Dynasty Real Estate has since evolved and broadened its scope.';

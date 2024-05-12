@@ -90,7 +90,7 @@ const vids = [
   'https://res.cloudinary.com/dboza0n1a/video/upload/v1715440830/aerial-hyperlapse-of-dubai-skyscrapers-during-scen-2022-08-04-10-57-54-utc_1_ccdl8q.mp4',
 ];
 
-const Navbar = ({ className }) => {
+export const Navbar = ({ className }) => {
   const [active, setActive] = useState(null);
   return (
     <div
@@ -116,7 +116,7 @@ const Navbar = ({ className }) => {
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="#">Our Team</HoveredLink>
-            <HoveredLink href="#">Contact</HoveredLink>
+            <HoveredLink href="/contact">Contact</HoveredLink>
             <HoveredLink href="#">About Us</HoveredLink>
           </div>
         </MenuItem>
@@ -208,6 +208,7 @@ const HeroSection = () => {
       }
     );
   }, []);
+
   return (
     <div className="relative w-screen h-screen z-[1] overflow-hidden" ref={ref}>
       <video
@@ -222,7 +223,7 @@ const HeroSection = () => {
       <div className="overlay bg-[#1a1a1a6c] absolute top-0 w-screen h-[120vh] flex justify-center items-center">
         <div className="absolute top-[45%] right-[50%] translate-x-[50%] -translate-y-[50%]">
           <div className=" flex items-end hero-title-container">
-            <h2 className="md:text-[50px] md:h-[58px] lg:h-[96px] lg:text-[80px] h-[71px] text-[60px] revamp-font text-white hero-dynasty-title opacity-0">
+            <h2 className="md:h-[96px] md:text-8xl h-[47px] text-5xl revamp-font text-white hero-dynasty-title opacity-0">
               DYNASTY
             </h2>
             <div className="relative w-fit overflow-hidden">
@@ -268,7 +269,7 @@ const Properties = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col justify-center items-center z-[2] h-[80vh] bg-[#13131a]">
+    <div className="relative flex flex-col justify-center items-center z-[2] h-[80vh] bg-dark">
       <div className="bg-gradient-to-t from-[#13131a] from-[80%] absolute -top-20 left-0 right-0 bottom-[50%] z-1"></div>
       <h1 className="text-white revamp-font-titi text-[30px] mb-10">
         View Listings
@@ -659,8 +660,8 @@ const Contact = () => {
     contactEffect();
   }, []);
   return (
-    <div className="dynasty-contact-container w-screen h-[100vh] md:h-auto lg:h-[100vh] overflow-hidden flex justify-center items-center">
-      <div className="dynasty-contact w-full h-full flex items-center justify-center bg-offwhite z-[10]">
+    <div className="dynasty-contact-container w-screen h-[100vh] md:h-auto lg:h-[100vh] bg-offwhite overflow-hidden flex justify-center items-center">
+      <div className="dynasty-contact w-full h-full flex items-center justify-center z-[10]">
         <div className="dynasty-contact-inside w-[80%]">
           <div>
             <h1 className="revamp-font-optima text-[25px] md:text-[30px] lg:text-[30px] overflow-hidden">
@@ -880,6 +881,7 @@ const Contact = () => {
     </div>
   );
 };
+
 const Partners = () => {
   return (
     <div className="h-[50vh] w-full flex flex-col items-center justify-center p-5 bg-offwhite">
@@ -936,7 +938,7 @@ const Partners = () => {
   );
 };
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div className="min-h-[60vh] flex justify-center items-center md:p-0 py-[40px] bg-[var(--bg)]">
       <div className="w-[80%] lg:h-[40%] h-full flex flex-wrap">

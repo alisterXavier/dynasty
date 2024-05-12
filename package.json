@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "@radix-ui/react-label": "^2.0.2",
     "@studio-freight/react-lenis": "^0.0.46",
     "@tabler/icons-react": "^3.3.0",
     "clsx": "^2.1.1",
