@@ -58,7 +58,7 @@ export const HoverEffect = ({ items, className }) => {
   let [hoveredIndex, setHoveredIndex] = useState();
 
   return (
-    <div className={cn('grid grid-cols-2  py-10', className)}>
+    <div className={cn('grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  py-10', className)}>
       {items.map((item, idx) => (
         <div
           key={idx}
@@ -84,8 +84,9 @@ export const HoverEffect = ({ items, className }) => {
             )}
           </AnimatePresence>
           <Card>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.para}</CardDescription>
+            <CardImage>{item.image}</CardImage>
+            <CardTitle>{item.name}</CardTitle>
+            <CardDescription>{item.designation}</CardDescription>
           </Card>
         </div>
       ))}
@@ -97,7 +98,7 @@ export const Card = ({ className, children }) => {
   return (
     <div
       className={cn(
-        'rounded-sm h-full w-full p-4 overflow-hidden bg-offwhite border group-hover:border-slate-400 relative z-20',
+        'card-effect rounded-sm h-full w-full p-4 overflow-hidden bg-white border group-hover:border-slate-400 relative z-20',
         className
       )}
     >
@@ -105,6 +106,13 @@ export const Card = ({ className, children }) => {
         <div className="p-4">{children}</div>
       </div>
     </div>
+  );
+};
+export const CardImage = ({ className, children }) => {
+  return (
+    <figure className="relative w-[200px] h-[200px]">
+      <Image src={children} alt="" fill objectFit='contain'/>
+    </figure>
   );
 };
 export const CardTitle = ({ className, children }) => {
@@ -123,7 +131,7 @@ export const CardDescription = ({ className, children }) => {
   return (
     <p
       className={cn(
-        'mt-8 text-black tracking-wide leading-relaxed text-sm revamp-font-titi',
+        'text-black tracking-wide leading-relaxed text-sm revamp-font-titi',
         className
       )}
     >

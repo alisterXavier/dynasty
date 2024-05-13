@@ -3,7 +3,6 @@ import Image from 'next/image';
 import staff from '@/public/images/staff-group-photo-enhanced.webp';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { cn } from '@/utils/cn';
 import { BentoGridItem } from '../components/cards';
 import { StaggerPara, StaggerText } from '../components/textStagger';
 import {
@@ -17,9 +16,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Mousewheel, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { HoveredLink, Menu, MenuItem, ProductItem } from '../components/navbar';
 import canal from '@/public/images/bg/IMG-20240505-WA0005.jpg';
-import logo from '@/public/images/logo/DYNASTY_WHITE.png';
+
 import { gsap } from 'gsap';
 import SplitType from 'split-type';
 
@@ -86,71 +84,6 @@ const vids = [
   'https://res.cloudinary.com/dboza0n1a/video/upload/v1715440839/aerial-view-of-dubai-frame-landmark-during-the-sun-2022-08-04-10-57-29-utc_2_tstge9.mp4',
   'https://res.cloudinary.com/dboza0n1a/video/upload/v1715440830/aerial-hyperlapse-of-dubai-skyscrapers-during-scen-2022-08-04-10-57-54-utc_1_ccdl8q.mp4',
 ];
-
-export const Navbar = ({ className }) => {
-  const [active, setActive] = useState(null);
-  return (
-    <div
-      className={cn(
-        'fixed top-0 inset-x-0 max-w-full ml-auto z-50 backdrop-blur-sm',
-        className
-      )}
-    >
-      <Menu setActive={setActive}>
-        <div className="relative w-[50px] h-[50px]">
-          <HoveredLink href="/">
-            <figure className="absolute w-[50px] h-[50px]">
-              <Image alt fill src={logo} />
-            </figure>
-          </HoveredLink>
-        </div>
-        {/* <MenuItem setActive={setActive} active={active} item="Home">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="#">Home</HoveredLink>
-          </div>
-        </MenuItem> */}
-        <Link className="text-offwhite p-4" href={'/'}>
-          Home
-        </Link>
-        <MenuItem setActive={setActive} active={active} item="About">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/team">Our Team</HoveredLink>
-            <HoveredLink href="/contact">Contact</HoveredLink>
-            <HoveredLink href="/about">About Us</HoveredLink>
-          </div>
-        </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Properties">
-          <div className="  text-sm grid grid-cols-2 gap-5 p-4">
-            <ProductItem
-              title="Luxury"
-              href="/properties?type=luxury"
-              src=""
-              description="Indulge in Spacious Apartments & Private Villas."
-            />
-            <ProductItem
-              title="Apartments"
-              href="/properties?type=apartments"
-              src=""
-              description="Own Your Dream Home Before It's Built."
-            />
-            <ProductItem
-              title="Villas"
-              href="/properties?type=villas"
-              src=""
-              description="Unwind in Luxury with Ample Room."
-            />
-            <ProductItem
-              title="Off-Plans"
-              href="/properties?type=off-plans"
-              src=""
-              description="Experience Ultimate Luxury & Exclusivity."
-            />
-          </div>
-        </MenuItem>
-      </Menu>
-    </div>
-  );
-};
 
 const HeroSection = () => {
   const ref = useRef();
@@ -230,7 +163,10 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen z-[1] overflow-hidden" ref={ref}>
+    <div
+      className="hero-section relative w-screen h-screen z-[1] overflow-hidden"
+      ref={ref}
+    >
       <video
         autoPlay
         loop
@@ -402,9 +338,11 @@ const AboutSection = () => {
             </StaggerPara>
           </div>
           <div className="w-full my-5">
-            <button className="md:text-[16px] text-[13px] px-8 py-2 bg-blue-500 text-white revamp-font-titi transition duration-200 hover:bg-white hover:text-black border-[1px] border-transparent hover:border-blue-500">
-              Meet The Team
-            </button>
+            <Link href="/team">
+              <button className="md:text-[16px] text-[13px] px-8 py-2 bg-blue-500 text-white revamp-font-titi transition duration-200 hover:bg-white hover:text-black border-[1px] border-transparent hover:border-blue-500">
+                Meet The Team
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -463,19 +401,14 @@ const Testimonials = () => {
           Testimonials
         </h1>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center w-[100%] md:w-[80%]">
         <Swiper
           mousewheel={true}
-          autoplay={{
-            delay: 1800,
-          }}
-          modules={[Mousewheel, Autoplay]}
-          style={{
-            '.swiperWrapper': {
-              width: '100%',
-            },
-          }}
-          className="mySwiper transition-all duration-75 !w-[90%] sm:!w-[80%]"
+          // autoplay={{
+          //   delay: 1800,
+          // }}
+          // modules={[Mousewheel, Autoplay]}
+          className="mySwiper transition-all duration-75"
         >
           {testimonials.map((item, index) => {
             return (
@@ -657,14 +590,17 @@ const Contact = () => {
               <p className="revamp-font-titi  dynasty-contact-email text-[10px] md:text-[15px]">
                 Our Email -
                 <span className="text-blue-500 text-[10px] md:text-[15px]">
-                  hello@dynastyrealestate.ae
+                  <Link href="mailto:hello@dynastyrealestate.ae">
+                    hello@dynastyrealestate.ae
+                  </Link>
                 </span>
               </p>
 
               <p className="revamp-font-titi dynasty-contact-number block text-[10px] md:text-[15px] pr-5">
                 Direct Line -
                 <span className="text-blue-500 text-[10px] md:text-[15px]">
-                  58 599 3405 (Calls & WhatApp)
+                  <Link href="https://wa.me/585993405">58 599 3405</Link>
+                  (Calls & WhatApp)
                 </span>
               </p>
             </div>
@@ -1015,7 +951,7 @@ export const Footer = () => {
             >
               Properties
             </motion.a>
-            <motion.a
+            {/* <motion.a
               href="/services"
               className="
               md:text-[16px] text-[13px]
@@ -1024,7 +960,7 @@ export const Footer = () => {
                       after:duration-200 text-white revamp-font-optima text-sm"
             >
               Our Services
-            </motion.a>
+            </motion.a> */}
             <motion.a
               href="/team"
               className="

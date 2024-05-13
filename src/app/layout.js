@@ -6,22 +6,33 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Observer } from 'gsap/Observer';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { Footer, Navbar } from './page';
+import { Footer } from './page';
+import Navbar from '../components/navbar-mobile';
+import { useSmallDeviceSize } from '@/utils/customHooks';
 
 gsap.registerPlugin(ScrollTrigger, Observer, ScrollToPlugin, MotionPathPlugin);
 
 export default function RootLayout({ children }) {
+  const isSmallScreen = useSmallDeviceSize();
   return (
     <html lang="en">
       <body>
-        <ReactLenis
-          root
-          options={{ lerp: 0.4, duration: 0.05, syncTouch: true }}
-        >
-          <Navbar />
-          {children}
-          <Footer />
-        </ReactLenis>
+        {isSmallScreen ? (
+          <>
+            <Navbar />
+            {children}
+            <Footer />
+          </>
+        ) : (
+          <ReactLenis
+            root
+            options={{ lerp: 0.4, duration: 0.05, syncTouch: true }}
+          >
+            <Navbar />
+            {children}
+            <Footer />
+          </ReactLenis>
+        )}
       </body>
     </html>
   );

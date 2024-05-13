@@ -2,8 +2,9 @@ const { useEffect, useState } = require('react');
 import gsap from 'gsap';
 import SplitType from 'split-type';
 
-export const StaggerText = ({ children }) => {
+export const StaggerText = ({ children, start }) => {
   const [isLoaded, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (isLoaded) {
       const ourText = new SplitType('.stagger-text');
@@ -22,13 +23,13 @@ export const StaggerText = ({ children }) => {
           ease: 'power4.out',
           scrollTrigger: {
             trigger: '.abt-section',
-            start: '60% bottom',
+            start: start ? start : '60% bottom',
           },
         }
       );
     }
     setIsLoading(true);
-  }, [isLoaded]);
+  }, [isLoaded, start]);
 
   return children;
 };

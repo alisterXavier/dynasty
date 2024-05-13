@@ -111,7 +111,7 @@ const Contact = () => {
   return (
     <div className="contact">
       <div className="min-h-screen">
-        <div className="flex flex-wrap min-h-full">
+        <div className="flex flex-wrap min-h-screen">
           <div className="w-full md:w-[50%] flex flex-col justify-end px-10 bg-darkButNotBlack">
             <h2 className="font-bold revamp-font-optima text-5xl text-offwhite">
               Contact Us
