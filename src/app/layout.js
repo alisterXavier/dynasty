@@ -7,7 +7,7 @@ import { Observer } from 'gsap/Observer';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { Footer } from './page';
-import Navbar from '../components/navbar-mobile';
+import Navbar from '../components/navbar';
 import { useSmallDeviceSize } from '@/utils/customHooks';
 
 gsap.registerPlugin(ScrollTrigger, Observer, ScrollToPlugin, MotionPathPlugin);

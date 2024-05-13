@@ -20,7 +20,7 @@ export function TabsDemo() {
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       ),
@@ -32,12 +32,11 @@ export function TabsDemo() {
         <div className="w-full overflow-hidden relative h-full rounded-2xl py-10 text-xl md:text-4xl font-bold text-white">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.099928568994!2d55.233107089480676!3d25.04570172382452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6f4b2c854bfd%3A0x2d15d47e501eb972!2sKojak%20Building!5e0!3m2!1sen!2sbh!4v1715448983679!5m2!1sen!2sbh"
-
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
             className="absolute w-[500px] h-[200px] md:w-[600px] md:h-[450px]"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       ),
@@ -62,16 +61,16 @@ export function SignupFormDemo() {
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Adolf" type="text" />
+            <Input id="firstname" placeholder="John" type="text" />
           </LabelInputContainer>
           <LabelInputContainer>
             <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Hitler" type="text" />
+            <Input id="lastname" placeholder="Doe" type="text" />
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="a.hitler@dynasty.ae" type="email" />
+          <Input id="email" placeholder="johnDoe@dynasty.ae" type="email" />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Message</Label>

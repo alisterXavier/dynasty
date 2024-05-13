@@ -1,91 +1,147 @@
-'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import logo from '@/public/images/logo/DYNASTY_WHITE.png';
+import { cn } from '@/utils/cn';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { HoveredLink, Menu, MenuItem, ProductItem } from './navbar-components';
+import { useSmallDeviceSize } from '@/utils/customHooks';
+import gsap from 'gsap';
 
-const transition = {
-  type: 'spring',
-  mass: 0.5,
-  damping: 11.5,
-  stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
+const NavbarSmall = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setIsActive(false);
+  };
+  return (
+    <>
+      <div className="fixed top-5 left-5 z-[100]">
+        <input
+          id="checkbox2"
+          className="relative z-[100]"
+          type="checkbox"
+          onChange={() => {
+            setIsActive(!isActive);
+          }}
+          checked={isActive}
+        />
+        <label class="toggle toggle2" for="checkbox2">
+          <div id="bar4" class="bars"></div>
+          <div id="bar5" class="bars"></div>
+          <div id="bar6" class="bars"></div>
+        </label>
+      </div>
+      <nav
+        className={`fixed top-0 left-0 flex items-center z-[99] bg-darkButNotBlack overflow-hidden h-screen transition-all duration-300  ${
+          isActive ? 'w-screen' : 'w-[0px]'
+        }`}
+      >
+        <div className={`flex flex-col p-10 mt-20 w-screen h-screen`}>
+          <div className="revamp-text-titi text-3xl my-5 text-offwhite">
+            <Link href="/" onClick={handleClick}>
+              Home
+            </Link>
+          </div>
+          <div className="revamp-text-titi text-3xl my-5 text-offwhite">
+            <Link href="/about" onClick={handleClick}>
+              About
+            </Link>
+          </div>
+          <div className="revamp-text-titi text-3xl my-5 text-offwhite">
+            <Link href="/properties" onClick={handleClick}>
+              Properties
+            </Link>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
 };
 
-export const MenuItem = ({ setActive, active, item, children }) => {
+const NavbarLarge = ({ className }) => {
+  const [active, setActive] = useState(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      '.nav-large-bg',
+      {
+        filter: 'blur(10px)',
+      },
+      {
+        filter: 'blur(0px)',
+        background: '#13131a',
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top 10%',
+          scrub: true,
+        },
+      }
+    );
+  }, []);
   return (
     <div
-      onMouseEnter={() => setActive(item)}
-      className="relative flex items-center justify-center px-5"
-    >
-      <motion.p
-        transition={{ duration: 0.3 }}
-        className="cursor-pointer hover:opacity-[0.9] text-white revamp-font-optima"
-      >
-        {item}
-      </motion.p>
-      {active !== null && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={transition}
-        >
-          {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
-              <motion.div
-                transition={transition}
-                layoutId="active" // layoutId ensures smooth animation
-                className="bg-[var(--bg)] backdrop-blur-sm overflow-hidden border border-white/[0.2] shadow-xl"
-              >
-                <motion.div
-                  layout // layout ensures smooth animation
-                  className="w-max h-full p-4"
-                >
-                  {children}
-                </motion.div>
-              </motion.div>
-            </div>
-          )}
-        </motion.div>
+      className={cn(
+        'fixed top-0 inset-x-0 max-w-full ml-auto z-50 nav-large',
+        className
       )}
+    >
+      <span className="nav-large-bg absolute w-screen h-[100%] top-0 left-0" />
+
+      <Menu setActive={setActive}>
+        <div className="relative w-[50px] h-[50px]">
+          <HoveredLink href="/">
+            <figure className="absolute w-[50px] h-[50px]">
+              <Image alt="" fill src={logo} />
+            </figure>
+          </HoveredLink>
+        </div>
+        <Link className="text-offwhite p-4" href={'/'}>
+          <p className='revamp-font-optima'>Home</p>
+        </Link>
+        <MenuItem setActive={setActive} active={active} item="About">
+          <div className="flex flex-col space-y-4 text-sm revamp-font-optima">
+            <HoveredLink href="/team">Our Team</HoveredLink>
+            <HoveredLink href="/contact">Contact</HoveredLink>
+            {/* <HoveredLink href="/about">About Us</HoveredLink> */}
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Properties">
+          <div className="  text-sm grid grid-cols-2 gap-5 p-4">
+            <ProductItem
+              title="Luxury"
+              href="/properties?type=luxury"
+              src="/images/properties/luxury.jpg"
+              description="Indulge in Spacious Apartments & Private Villas."
+            />
+            <ProductItem
+              title="Apartments"
+              href="/properties?type=apartments"
+              src="/images/properties/apartment.jpeg"
+              description="Own Your Dream Home Before It's Built."
+            />
+            <ProductItem
+              title="Villas"
+              href="/properties?type=villas"
+              src="/images/properties/villa.jpg"
+              description="Unwind in Luxury with Ample Room."
+            />
+            <ProductItem
+              title="Off-Plans"
+              href="/properties?type=off-plans"
+              src="/images/properties/off-plan.jpg"
+              description="Experience Ultimate Luxury & Exclusivity."
+            />
+          </div>
+        </MenuItem>
+      </Menu>
     </div>
   );
 };
 
-export const Menu = ({ setActive, children }) => {
-  return (
-    <nav
-      onMouseLeave={() => setActive(null)}
-      className="relative border-transparent flex items-center justify-start space-x-4 px-8 py-4"
-    >
-      {children}
-    </nav>
-  );
+const Navbar = () => {
+  const isSmallScreen = useSmallDeviceSize();
+
+  return isSmallScreen ? <NavbarSmall /> : <NavbarLarge />;
 };
 
-export const ProductItem = ({ title, description, href, src }) => {
-  return (
-    <Link href={href} className="flex space-x-2">
-      <Image
-        src={src}
-        width={140}
-        height={70}
-        alt={title}
-        className="flex-shrink-0 shadow-2xl"
-      />
-      <div>
-        <h4 className="text-xl mb-1 text-white revamp-font-optima">{title}</h4>
-        <p className="text-[13px] max-w-[8rem] text-neutral-300 revamp-font-titi">{description}</p>
-      </div>
-    </Link>
-  );
-};
-
-export const HoveredLink = ({ children, ...rest }) => {
-  return (
-    <Link {...rest} className="text-neutral-200 hover:text-gray-500">
-      {children}
-    </Link>
-  );
-};
+export default Navbar;
