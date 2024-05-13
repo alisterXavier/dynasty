@@ -21,7 +21,7 @@ export const MenuItem = ({ setActive, active, item, children }) => {
     >
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer hover:opacity-[0.9] text-white"
+        className="cursor-pointer hover:opacity-[0.9] text-white revamp-font-optima"
       >
         {item}
       </motion.p>
@@ -75,8 +75,8 @@ export const ProductItem = ({ title, description, href, src }) => {
         className="flex-shrink-0 shadow-2xl"
       />
       <div>
-        <h4 className="text-xl font-bold mb-1 text-white">{title}</h4>
-        <p className="text-sm max-w-[8rem] text-neutral-300">{description}</p>
+        <h4 className="text-xl mb-1 text-white revamp-font-optima">{title}</h4>
+        <p className="text-[13px] max-w-[8rem] text-neutral-300 revamp-font-titi">{description}</p>
       </div>
     </Link>
   );

@@ -96,10 +96,10 @@ const NavbarLarge = ({ className }) => {
           </HoveredLink>
         </div>
         <Link className="text-offwhite p-4" href={'/'}>
-          Home
+          <p className='revamp-font-optima'>Home</p>
         </Link>
         <MenuItem setActive={setActive} active={active} item="About">
-          <div className="flex flex-col space-y-4 text-sm">
+          <div className="flex flex-col space-y-4 text-sm revamp-font-optima">
             <HoveredLink href="/team">Our Team</HoveredLink>
             <HoveredLink href="/contact">Contact</HoveredLink>
             {/* <HoveredLink href="/about">About Us</HoveredLink> */}
@@ -110,25 +110,25 @@ const NavbarLarge = ({ className }) => {
             <ProductItem
               title="Luxury"
               href="/properties?type=luxury"
-              src=""
+              src="/images/properties/luxury.jpg"
               description="Indulge in Spacious Apartments & Private Villas."
             />
             <ProductItem
               title="Apartments"
               href="/properties?type=apartments"
-              src=""
+              src="/images/properties/apartment.jpeg"
               description="Own Your Dream Home Before It's Built."
             />
             <ProductItem
               title="Villas"
               href="/properties?type=villas"
-              src=""
+              src="/images/properties/villa.jpg"
               description="Unwind in Luxury with Ample Room."
             />
             <ProductItem
               title="Off-Plans"
               href="/properties?type=off-plans"
-              src=""
+              src="/images/properties/off-plan.jpg"
               description="Experience Ultimate Luxury & Exclusivity."
             />
           </div>
