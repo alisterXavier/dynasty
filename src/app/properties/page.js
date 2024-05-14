@@ -90,7 +90,7 @@ const Properties = () => {
 
   return (
     <div className="bg-offwhite min-h-screen flex flex-col items-center py-[15vh]">
-      <div className="w-[80%] my-5">
+      <div className="w-[80%] my-5 flex justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-fit">
           {renderAutocomplete(locations, 'Location', (event, newValue) =>
             setSelectedLocation(newValue)
@@ -100,7 +100,7 @@ const Properties = () => {
           )}
         </div>
       </div>
-      <BentoGrid className="w-[70%] md:w-[80%] mx-auto">
+      <BentoGrid className="w-[60%] md:w-[80%] mx-auto">
         {filtered.map((item, i) => (
           <BentoGridItem
             key={i}

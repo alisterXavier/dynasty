@@ -10,30 +10,37 @@ import { GetIntouch } from '../contact/page';
 import parse from 'html-react-parser';
 
 const Hero = ({ title, images, location }) => {
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    gsap.fromTo(
-      '.fade-img',
-      {
-        opacity: 0,
-      },
-      { opacity: 1, duration: 1.5 }
-    );
-
-    gsap.fromTo(
-      '.property-hero-inner',
-      {
-        y: 0,
-      },
-      {
-        y: '-50%',
-        scrollTrigger: {
-          trigger: '.dynasty-real-estate',
-          start: 'top top',
-          scrub: true,
+    if (loaded) {
+      gsap.fromTo(
+        '.fade-img',
+        {
+          opacity: 0,
         },
-      }
-    );
-  }, []);
+        { opacity: 1, duration: 1.5 }
+      );
+
+      gsap.fromTo(
+        '.property-hero-inner',
+        {
+          y: 0,
+        },
+        {
+          y: '-50%',
+          scrollTrigger: {
+            trigger: '.dynasty-real-estate',
+            start: 'top top',
+            scrub: true,
+          },
+        }
+      );
+
+      setInterval(() => {
+        handleNext();
+      }, 5000);
+    } else setLoaded(true);
+  }, [loaded]);
 
   const handleNext = () => {
     var curr = document.querySelector('.property-hero-images .z-10');
@@ -131,18 +138,8 @@ const Details = ({
   type,
   map,
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  // useEffect(() => {
-  //   if (isLoaded && map) {
-  //     const loc = document.querySelector('.property-loaction iframe');
-  //     loc.style.width = '100%';
-  //     loc.style.height = '60vh';
-  //   } else setIsLoaded(true);
-  // }, [isLoaded, map]);
-
   return (
-    <div className="property-details min-h-screen p-20">
+    <div className="property-details min-h-screen">
       <div className="my-5 ">
         <p className="revamp-font-optima text-lg md:text-4xl">{title}</p>
         <p className="revamp-font-optima text-lg md:text-2xl">{location}</p>
@@ -231,7 +228,7 @@ const Details = ({
         </div>
       </div>
 
-      <div className="property-loaction mt-10">{map}</div>
+      <div className="property-loaction mt-10 h-[50vh]">{map}</div>
     </div>
   );
 };
@@ -260,28 +257,59 @@ const Property = () => {
       {data && (
         <>
           <Hero images={[]} title={data.title} location={data.location} />
-          <Details
-            price={data.price}
-            bedrooms={data.bedrooms}
-            bathrooms={data.bathrooms}
-            title={data.title}
-            location={data.location}
-            agent={{
-              name: data.agentName,
-              designation: data.agentDesignation,
-            }}
-            description={data.description}
-            image={data.images}
-            type={data.type}
-            status={data.status}
-            map={parse(`${data.map}`)}
-          />
-          <div className="flex">
-            <div className="w-[40%]"></div>
-            <GetIntouch
-              className="w-[50%] property-contact"
-              placeholder={`Hey ${data.agentName},\nI'm interested in this property. Let's connect. ${url}`}
+          <div className='p-20'>
+            <Details
+              price={data.price}
+              bedrooms={data.bedrooms}
+              bathrooms={data.bathrooms}
+              title={data.title}
+              location={data.location}
+              agent={{
+                name: data.agentName,
+                designation: data.agentDesignation,
+              }}
+              description={data.description}
+              image={data.images}
+              type={data.type}
+              status={data.status}
+              map={parse(`${data.map}`)}
             />
+            <div className="flex mt-[15vh]">
+              <div className="w-[40%] flex flex-col p-10 bg-darkButNotBlack">
+                <div className="flex ">
+                  <figure className="relative w-[150px] h-[150px]">
+                    <Image
+                      src="/images/team/edgar.png"
+                      alt=""
+                      fill
+                      objectFit="contain"
+                    />
+                  </figure>
+                  <div className="flex flex-col justify-end">
+                    <h2 className="revamp-font-optima text-white text-lg md:text-4xl">
+                      {data.agentName}
+                    </h2>
+                    <h2 className="revamp-font-optima text-white text-sm md:text-md">
+                      {data.agentDesignation}
+                    </h2>
+                    <p className='text-white '>{data.agentEmail}</p>
+                  </div>
+                </div>
+                <div className="p-10">
+                  <h2 className="revamp-font-optima text-white  text-2xl flex items-center group cursor-pointer">
+                    Get in touch
+                    <IconArrowRight
+                      size={20}
+                      className="group-hover:translate-x-[10px] transition-all"
+                    />
+                  </h2>
+                </div>
+              </div>
+              <GetIntouch
+                className="w-[60%] property-contact md:p-0 shadow-none md:pl-10"
+                placeholder={`Hey ${data.agentName},\nI'm interested in this property. Let's connect. ${url}`}
+              />
+            </div>
           </div>
         </>
       )}

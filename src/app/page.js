@@ -340,19 +340,14 @@ const AboutSection = () => {
             />
           </div>
           <div className="flex flex-col justify-center w-full">
-            <StaggerPara>
-              <p className="stagger-para md:text-[16px] text-[13px] w-[100%] text-black revamp-font-titi overflow-hidden">
-                With a distinguished presence spanning over 5 years in the UAE
-                Real Estate market, Dynasty Real Estate stands as a foremost
-                brokerage firm in Dubai. Our esteemed standing is a testament to
-                our unwavering dedication and the favorable results we
-                consistently deliver to our clients, facilitated by a team of
-                highly skilled, professional, and multilingual real estate
-                agents. While initially excelling in the off-plan, resale, and
-                rental sectors, Dynasty Real Estate has since evolved and
-                broadened its scope.
-              </p>
-            </StaggerPara>
+            <StaggerPara
+              text={
+                'With a distinguished presence spanning over 5 years in the UAE Real Estate market, Dynasty Real Estate stands as a foremost brokerage firm in Dubai. Our esteemed standing is a testament to our unwavering dedication and the favorable results we consistently deliver to our clients, facilitated by a team of highly skilled, professional, and multilingual real estate agents. While initially excelling in the off-plan, resale, and rental sectors, Dynasty Real Estate has since evolved and broadened its scope.'
+              }
+              className="stagger-para md:text-[16px] text-[13px] w-[100%] text-black revamp-font-titi overflow-hidden"
+              start={'60% bottom'}
+              parent={'.abt-section'}
+            />
           </div>
           <div className="w-full my-5">
             <Link href="/team">

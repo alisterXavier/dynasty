@@ -9,10 +9,19 @@ import gsap from 'gsap';
 
 const NavbarSmall = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isAboutActive, setIsAboutActive] = useState(false);
+  const [isPropertiesActive, setIsPropertiesActive] = useState(false);
 
   const handleClick = () => {
     setIsActive(false);
   };
+  const handleAbout = () => {
+    setIsAboutActive(!isAboutActive);
+  };
+  const handleProperties = () => {
+    setIsPropertiesActive(!isPropertiesActive);
+  };
+
   return (
     <>
       <div className="fixed top-5 left-5 z-[100]">
@@ -37,20 +46,78 @@ const NavbarSmall = () => {
         }`}
       >
         <div className={`flex flex-col p-10 mt-20 w-screen h-screen`}>
-          <div className="revamp-text-titi text-3xl my-5 text-offwhite">
+          <div className="revamp-text-titi text-2xl my-5 text-offwhite">
             <Link href="/" onClick={handleClick}>
               Home
             </Link>
           </div>
-          <div className="revamp-text-titi text-3xl my-5 text-offwhite">
-            <Link href="/about" onClick={handleClick}>
-              About
-            </Link>
+          <div className="revamp-text-titi text-2xl my-5 text-offwhite">
+            <div>
+              <p onClick={handleAbout} className="">
+                About
+              </p>
+              <div
+                className={`flex flex-col ${
+                  isAboutActive ? 'h-[80px]' : 'h-[0px]'
+                } overflow-hidden transition-all`}
+              >
+                <Link
+                  href="/team"
+                  onClick={handleClick}
+                  className="my-2 mx-5 text-lg"
+                >
+                  Our Team
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={handleClick}
+                  className="my-2 mx-5 text-lg"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
           </div>
-          <div className="revamp-text-titi text-3xl my-5 text-offwhite">
-            <Link href="/properties" onClick={handleClick}>
-              Properties
-            </Link>
+          <div className="revamp-text-titi text-2xl my-5 text-offwhite">
+            <div>
+              <p onClick={handleProperties} className="">
+                Properties
+              </p>
+              <div
+                className={`flex flex-col ${
+                  isPropertiesActive ? 'h-[200px]' : 'h-[0px]'
+                } overflow-hidden transition-all`}
+              >
+                <Link
+                  href="/properties?type=luxury"
+                  onClick={handleClick}
+                  className="my-2 mx-5 text-lg"
+                >
+                  Luxury
+                </Link>
+                <Link
+                  href="/properties?type=off-plans"
+                  onClick={handleClick}
+                  className="my-2 mx-5 text-lg"
+                >
+                  Off-sale
+                </Link>
+                <Link
+                  href="/properties?type=villas"
+                  onClick={handleClick}
+                  className="my-2 mx-5 text-lg"
+                >
+                  Villas
+                </Link>
+                <Link
+                  href="/properties?type=apartments"
+                  onClick={handleClick}
+                  className="my-2 mx-5 text-lg"
+                >
+                  Apartments
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -96,7 +163,7 @@ const NavbarLarge = ({ className }) => {
           </HoveredLink>
         </div>
         <Link className="text-offwhite p-4" href={'/'}>
-          <p className='revamp-font-optima'>Home</p>
+          <p className="revamp-font-optima">Home</p>
         </Link>
         <MenuItem setActive={setActive} active={active} item="About">
           <div className="flex flex-col space-y-4 text-sm revamp-font-optima">
