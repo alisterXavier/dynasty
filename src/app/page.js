@@ -20,6 +20,8 @@ import canal from '@/public/images/bg/IMG-20240505-WA0005.jpg';
 
 import { gsap } from 'gsap';
 import SplitType from 'split-type';
+import { supabase } from '@/utils/supabase';
+import { useRouter } from 'next/navigation';
 
 const adv = [
   {
@@ -197,13 +199,17 @@ const HeroSection = () => {
 
 const Properties = () => {
   const [data, setData] = useState([]);
+  const router = useRouter();
   const getData = async () => {
-    await fetch('/dummy/data.json')
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res);
-      });
+    const res = await supabase
+      .from('Properties')
+      .select()
+      .order('created_at', { ascending: true })
+      .limit(7);
+
+    setData(res.data);
   };
+
   const swiperRef = useRef();
 
   const ButtonGroup = () => {
@@ -233,7 +239,7 @@ const Properties = () => {
       <Swiper
         mousewheel={true}
         autoplay={{
-          delay: 1800,
+          delay: 3000,
         }}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
@@ -264,10 +270,19 @@ const Properties = () => {
             <SwiperSlide key={index} className="cursor-pointer">
               <BentoGridItem
                 className="carousel-item w-[300px] h-[400px] rounded-md"
-                title={item.title}
-                description={item.address}
+                title={
+                  <p className="whitespace-nowrap w-full text-ellipsis overflow-hidden">
+                    {item.title}
+                  </p>
+                }
+                description={<p className="">{item.description}</p>}
+                header={<p className="">{item.type}</p>}
                 image={item.image}
-                details={item.details}
+                price={<p className="">{item.price}</p>}
+                location={<p className="">{item.location}</p>}
+                onClick={() => {
+                  router.push(`/property?id=${item.id}`);
+                }}
               ></BentoGridItem>
             </SwiperSlide>
           );
@@ -306,6 +321,7 @@ const AboutSection = () => {
       }
     );
   }, []);
+
   return (
     <div className="abt-section w-screen min-h-screen p-10 flex flex-wrap items-center bg-offwhite">
       <div className="md:w-[50%] w-full h-[100%] flex items-center justify-center">
@@ -316,11 +332,12 @@ const AboutSection = () => {
       <div className="md:w-[50%] w-full flex justify-center items-center">
         <div className=" md:w-[80%] flex flex-col justify-center items-center">
           <div className="w-full">
-            <StaggerText>
-              <h1 className="stagger-text md:text-4xl text-2xl text-black revamp-font-optima flex overflow-hidden">
-                Discover Our Uniqueness
-              </h1>
-            </StaggerText>
+            <StaggerText
+              text="Discover Our Uniqueness"
+              start={'60% bottom'}
+              parent={'.abt-section'}
+              className="stagger-text md:text-4xl text-2xl text-black revamp-font-optima flex overflow-hidden"
+            />
           </div>
           <div className="flex flex-col justify-center w-full">
             <StaggerPara>
@@ -857,7 +874,7 @@ const Partners = () => {
 
 export const Footer = () => {
   return (
-    <div className="min-h-[60vh] flex justify-center items-center md:p-0 py-[40px] bg-[var(--bg)]">
+    <div className="min-h-[60vh] flex justify-center items-center md:p-0 py-[40px] bg-[var(--bg)] mt-10">
       <div className="w-[80%] md:h-[40%] h-full flex flex-wrap">
         <div className="flex flex-wrap md:w-[80%] w-full h-[100%]">
           <div className="md:w-[50%] w-full h-[100%] my-5">

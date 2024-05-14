@@ -24,6 +24,7 @@ export const BentoGridItem = ({
   icon,
   price,
   location,
+  onClick,
 }) => {
   return (
     <div
@@ -31,11 +32,12 @@ export const BentoGridItem = ({
         'row-span-1 group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 bg-[#13131a] border border-transparent justify-between flex flex-col space-y-4 cursor-pointer',
         className
       )}
+      onClick={onClick}
     >
       <figure className="relative w-[200px] h-[200px] md:w-[100%] md:h-[70%] ">
         <Image src={image} fill sizes="100%" alt="" />
       </figure>
-      <div className="group-hover/bento:translate-x-2 transition duration-200">
+      <div className="group-hover/bento:translate-x-2 transition duration-200 h-[100px]">
         {icon}
         <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2">
           {title}
@@ -58,7 +60,12 @@ export const HoverEffect = ({ items, className }) => {
   let [hoveredIndex, setHoveredIndex] = useState();
 
   return (
-    <div className={cn('grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  py-10', className)}>
+    <div
+      className={cn(
+        'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  py-10',
+        className
+      )}
+    >
       {items.map((item, idx) => (
         <div
           key={idx}
@@ -111,7 +118,7 @@ export const Card = ({ className, children }) => {
 export const CardImage = ({ className, children }) => {
   return (
     <figure className="relative w-[200px] h-[200px]">
-      <Image src={children} alt="" fill objectFit='contain'/>
+      <Image src={children} alt="" fill objectFit="contain" />
     </figure>
   );
 };

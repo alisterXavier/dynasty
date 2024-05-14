@@ -9,8 +9,9 @@ import { Suspense } from 'react';
 import { supabase } from '@/utils/supabase';
 
 const Properties = () => {
-  const router = useSearchParams();
-  const type = router.get('type');
+  const query = useSearchParams();
+  const router = useRouter();
+  const type = query.get('type');
   const [properties, setProperties] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
   const [locations, setLocations] = useState([]);
@@ -103,17 +104,26 @@ const Properties = () => {
         {filtered.map((item, i) => (
           <BentoGridItem
             key={i}
-            title={<p className="text-darkButNotBlack">{item.title}</p>}
+            title={
+              <p className="text-darkButNotBlack whitespace-nowrap w-full text-ellipsis overflow-hidden">
+                {item.title}
+              </p>
+            }
             description={
-              <p className="text-darkButNotBlack">{item.description}</p>
+              <p className="text-darkButNotBlack h-[30px] overflow-hidden text-ellipsis">
+                {item.description}
+              </p>
             }
             header={<p className="text-darkButNotBlack">{item.type}</p>}
-            image={item.image}
+            image={item.images}
             price={<p className="text-darkButNotBlack">{item.price}</p>}
             location={<p className="text-darkButNotBlack">{item.location}</p>}
             className={`${
               i === 4 || i === 9 ? 'md:col-span-2 ' : ''
             }!bg-white border border-gray-200`}
+            onClick={() => {
+              router.push(`/property?id=${item.id}`);
+            }}
           />
         ))}
       </BentoGrid>

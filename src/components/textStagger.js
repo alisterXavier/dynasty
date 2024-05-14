@@ -2,11 +2,11 @@ const { useEffect, useState } = require('react');
 import gsap from 'gsap';
 import SplitType from 'split-type';
 
-export const StaggerText = ({ children, start }) => {
+export const StaggerText = ({ text, start, className, parent }) => {
   const [isLoaded, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && text) {
       const ourText = new SplitType('.stagger-text');
       const chars = ourText.chars;
       gsap.fromTo(
@@ -22,21 +22,21 @@ export const StaggerText = ({ children, start }) => {
           duration: 1.5,
           ease: 'power4.out',
           scrollTrigger: {
-            trigger: '.abt-section',
-            start: start ? start : '60% bottom',
+            trigger: parent,
+            start: start,
           },
         }
       );
-    }
-    setIsLoading(true);
-  }, [isLoaded, start]);
+    } else setIsLoading(true);
+  }, [isLoaded, parent, start, text]);
 
-  return children;
+  return <p className={className}>{text}</p>;
 };
-export const StaggerPara = ({ children }) => {
+
+export const StaggerPara = ({ text, parent, start, className }) => {
   const [isLoaded, setIsLoading] = useState(false);
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && text) {
       const ourPara = new SplitType('.stagger-para');
       gsap.fromTo(
         ourPara.lines,
@@ -51,15 +51,13 @@ export const StaggerPara = ({ children }) => {
           duration: 1.5,
           ease: 'power4.out',
           scrollTrigger: {
-            trigger: '.abt-section',
-            start: '60% bottom',
+            trigger: parent,
+            start: start,
           },
         },
         0.5
       );
-    }
-    setIsLoading(true);
-  }, [isLoaded]);
-
-  return children;
+    } else setIsLoading(true);
+  }, [isLoaded, parent, start, text]);
+  return <p className={className}>{text}</p>;
 };

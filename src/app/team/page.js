@@ -93,11 +93,14 @@ const Team = () => {
     );
   }, []);
   return (
-    <div className="min-h-screen px-10 py-[15vh] bg-offwhite">
+    <div className="dynasty-team min-h-screen px-10 py-[15vh] bg-offwhite">
       <div>
-        <StaggerText start="top 10%">
-          <h1 className="stagger-text text-4xl revamp-font-optima">Our Team</h1>
-        </StaggerText>
+        <StaggerText
+          text="Our Team"
+          start="top 10%"
+          parent={'.dynasty-team'}
+          className="stagger-text text-4xl revamp-font-optima"
+        />
       </div>
       <div className="w-[95%]">
         <HoverEffect items={team} className={'hover-cards'} />
