@@ -943,7 +943,7 @@ export const Footer = () => {
             </h1>
           </div>
           <div className="flex flex-col">
-            <motion.a
+            {/* <motion.a
               href="/about"
               className="
               md:text-[16px] text-[13px]
@@ -952,7 +952,7 @@ export const Footer = () => {
                       after:duration-200 text-white revamp-font-optima"
             >
               About
-            </motion.a>
+            </motion.a> */}
             <motion.a
               href="/properties"
               className="

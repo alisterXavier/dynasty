@@ -1,4 +1,4 @@
-const { useEffect, useState } = require('react');
+const { useEffect, useState, useRef } = require('react');
 import gsap from 'gsap';
 import SplitType from 'split-type';
 
@@ -35,9 +35,10 @@ export const StaggerText = ({ text, start, className, parent }) => {
 
 export const StaggerPara = ({ text, parent, start, className }) => {
   const [isLoaded, setIsLoading] = useState(false);
+  const ref = useRef();
   useEffect(() => {
-    if (isLoaded && text) {
-      const ourPara = new SplitType('.stagger-para');
+    if (ref.current && isLoaded && text && parent) {
+      const ourPara = new SplitType(ref.current);
       gsap.fromTo(
         ourPara.lines,
         {
@@ -59,5 +60,10 @@ export const StaggerPara = ({ text, parent, start, className }) => {
       );
     } else setIsLoading(true);
   }, [isLoaded, parent, start, text]);
-  return <p className={className}>{text}</p>;
+
+  return (
+    <p ref={ref} className={className}>
+      {text}
+    </p>
+  );
 };

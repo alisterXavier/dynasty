@@ -11,6 +11,7 @@ import parse from 'html-react-parser';
 
 const Hero = ({ title, images, location }) => {
   const [loaded, setLoaded] = useState(false);
+  
   useEffect(() => {
     if (loaded) {
       gsap.fromTo(
@@ -41,7 +42,7 @@ const Hero = ({ title, images, location }) => {
       }, 5000);
     } else setLoaded(true);
   }, [loaded]);
-
+  
   const handleNext = () => {
     var curr = document.querySelector('.property-hero-images .z-10');
     var next = curr.nextSibling;
@@ -67,49 +68,27 @@ const Hero = ({ title, images, location }) => {
     <div className="property-hero">
       <div className="property-hero-inner w-screen h-screen relative bg-darkButNotBlack flex items-center justify-center">
         <div className="property-hero-images w-full h-full">
-          <figure className="absolute z-10 top-0 fade-img w-full h-full">
-            <Image
-              src="/images/bg/IMG-20240505-WA0005.jpg"
-              fill
-              alt=""
-              objectFit="contain"
-            />
-          </figure>
-          <figure className="absolute top-0 fade-img w-full h-full">
-            <Image
-              src="/images/adv/SB10-01-01.jpg"
-              fill
-              alt=""
-              objectFit="contain"
-            />
-          </figure>
-          <figure className="absolute top-0 fade-img w-full h-full">
-            <Image
-              src="/images/bg/IMG-20240505-WA0005.jpg"
-              fill
-              alt=""
-              objectFit="contain"
-            />
-          </figure>
-          <figure className="absolute top-0 fade-img w-full h-full">
-            <Image
-              src="/images/bg/IMG-20240505-WA0005.jpg"
-              fill
-              alt=""
-              objectFit="contain"
-            />
-          </figure>
+          {images?.map((image, i) => {
+            return (
+              <figure
+                key={i}
+                className="absolute z-10 top-0 fade-img w-full h-full"
+              >
+                <Image src={image} fill alt="" objectFit="contain" />
+              </figure>
+            );
+          })}
         </div>
-        <div className="absolute z-10 bottom-0 left-0 md:bottom-5 md:left-5 text-offwhite overflow-hidden">
+        <div className="absolute z-10 bottom-0 md:bottom-5 left-5 text-offwhite overflow-hidden my-20">
           <StaggerText
             text={title}
             parent={'.property-hero'}
-            className="stagger-text revamp-font-optima my-5 text-2xl md:text-7xl"
+            className="stagger-text revamp-font-optima text-2xl md:text-7xl"
           />
           <StaggerText
-            text={location}
+            text={location?.general}
             parent={'.property-hero'}
-            className="stagger-text revamp-font-optima my-5 text-xl md:text-3xl"
+            className="stagger-text revamp-font-optima text-xl md:text-3xl"
           />
         </div>
         <div className="btns absolute w-[100px] z-[100] bottom-10 right-10 flex justify-between">
@@ -135,28 +114,40 @@ const Details = ({
   description,
   image,
   status,
+  size,
   type,
   map,
+  flooring_plans,
+  flooring_description,
+  amenities,
 }) => {
   return (
-    <div className="property-details min-h-screen">
+    <div className="property-details">
       <div className="my-5 ">
         <p className="revamp-font-optima text-lg md:text-4xl">{title}</p>
-        <p className="revamp-font-optima text-lg md:text-2xl">{location}</p>
+        <p className="revamp-font-optima text-lg md:text-2xl">
+          {location?.general}
+        </p>
       </div>
       <div className="flex justify-between flex-col md:flex-row">
-        <div className="flex flex-col md:flex-row w-full md:w-[60%]">
-          <div className="w-[100px] md:w-[300px]">
+        <div className="flex flex-wrap md:flex-row w-full md:w-[60%]">
+          <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
             <h2 className="revamp-font-titi text-sm md:text-md my-2">Price</h2>
             <p className="revamp-font-optima text-xl md:text-xl">{price} AED</p>
           </div>
-          <div className="w-[100px] md:w-[300px]">
+          <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
+            <h2 className="revamp-font-titi text-sm md:text-md my-2">Size</h2>
+            <p className="revamp-font-optima text-xl md:text-xl">
+              {size} sq<span className="text-sm align-super">ft</span>
+            </p>
+          </div>
+          <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
             <h2 className="revamp-font-titi text-sm md:text-md my-2">
               Bedrooms
             </h2>
             <p className="revamp-font-optima text-xl md:text-xl">{bedrooms}</p>
           </div>
-          <div className="w-[100px] md:w-[300px]">
+          <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
             <h2 className="revamp-font-titi text-sm md:text-md my-2">
               Bathrooms
             </h2>
@@ -164,7 +155,7 @@ const Details = ({
           </div>
         </div>
         <div
-          className="w-full md:w-[35%] bg-darkButNotBlack p-5 flex justify-between items-center cursor-pointer"
+          className="w-full mt-5 md:mt-0 md:w-[35%] bg-darkButNotBlack p-5 flex justify-between items-center cursor-pointer"
           onClick={() => {
             document
               .querySelector(`.property-contact`)
@@ -183,8 +174,8 @@ const Details = ({
         </div>
       </div>
 
-      <div className="my-20 ">
-        <div className="flex justify-between">
+      <div className="mt-20 md:my-20 ">
+        <div className="flex flex-col md:flex-row justify-between">
           <div className="w-full md:w-[60%]">
             <h2 className="revamp-font-titi text-md text-md my-2">
               Description
@@ -193,19 +184,19 @@ const Details = ({
               text={description}
               className="stagger-para revamp-font-optima text-xl md:text-xl"
               parent={'.property-details'}
-              start={'40% bottom'}
+              start={'top 10%'}
             />
           </div>
 
-          <div className="w-[35%]">
+          <div className="mt-5 w-full md:w-[35%]">
             <div className="flex flex-wrap mb-5">
-              <div className="w-full md:w-[50%]">
+              <div className="w-[50%]">
                 <p className="text-sm md:text-md revamp-font-titi my-2">Type</p>
                 <p className="text-lg md:text-xl revamp-font-optima capitalize">
                   {type}
                 </p>
               </div>
-              <div className="w-full md:w-[50%]">
+              <div className="w-[50%]">
                 <p className="text-sm md:text-md revamp-font-titi my-2">
                   Status
                 </p>
@@ -216,19 +207,79 @@ const Details = ({
             </div>
             <div className="relative w-full h-full flex justify-center">
               <figure className="relative w-[100%] h-[80%] z-10">
-                <Image
-                  src="/images/bg/IMG-20240505-WA0005.jpg"
-                  alt=""
-                  fill
-                  objectFit="contain"
-                />
+                <Image src={image} alt="" fill objectFit="contain" />
               </figure>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="property-loaction mt-10 h-[50vh]">{map}</div>
+      {flooring_plans && flooring_description ? (
+        <FloorPans images={flooring_plans} description={flooring_description} />
+      ) : (
+        <></>
+      )}
+      {amenities ? <Amenities amenities={amenities} /> : <></>}
+
+      <div className="property-loaction mt-5 md:mt-10 h-[50vh]">
+        <h2 className="text-xl md:text-3xl revamp-font-titi">Location</h2>
+        <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
+          <p className="revamp-font-optima text-xl md:text-xl">
+            {location?.exact ?? '-'}
+          </p>
+        </div>
+        {map}
+      </div>
+    </div>
+  );
+};
+
+const FloorPans = ({ images, description }) => {
+  return (
+    <div className="floor-plans">
+      <h2 className="text-xl md:text-3xl revamp-font-titi my-5">Floor Plans</h2>
+      <div className="flex flex-wrap">
+        {images.map((image, i) => {
+          return (
+            <figure
+              key={i}
+              className="relative w-[100%] md:mx-5 md:w-[400px] h-[300px]"
+            >
+              <Image className="" src={image} alt="" fill objectFit="contain" />
+            </figure>
+          );
+        })}
+      </div>
+      <div className="flooring-plan-description mt-10 overflow-hidden">
+        <StaggerPara
+          text={description}
+          className="stagger-para revamp-font-optima text-xl md:text-xl"
+          parent={'.floor-plans'}
+          start={'100% bottom'}
+        />
+      </div>
+    </div>
+  );
+};
+
+const Amenities = ({ amenities }) => {
+  return (
+    <div className="property-amenities my-5">
+      <h2 className="text-xl md:text-3xl revamp-font-titi">Amenities</h2>
+      <div className="flex flex-wrap">
+        {amenities.map((amenity, index) => {
+          return (
+            <div key={index} className="w-[200px] my-2 md:my-0 md:w-[300px]">
+              <h2 className="revamp-font-titi text-sm md:text-md my-2">
+                {amenity.title}
+              </h2>
+              <p className="revamp-font-optima text-xl md:text-xl">
+                {amenity.text}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -256,8 +307,12 @@ const Property = () => {
     <div className="dynasty-real-estate min-h-screen w-screen">
       {data && (
         <>
-          <Hero images={[]} title={data.title} location={data.location} />
-          <div className='p-20'>
+          <Hero
+            images={[data.images] ?? [""]}
+            title={data.title}
+            location={data.location}
+          />
+          <div className="p-10 md:p-20">
             <Details
               price={data.price}
               bedrooms={data.bedrooms}
@@ -273,9 +328,37 @@ const Property = () => {
               type={data.type}
               status={data.status}
               map={parse(`${data.map}`)}
+              size={data.size}
+              flooring_plans={
+                data.flooring_plan ?? [
+                  '/images/creek.webp',
+                  '/images/creek.webp',
+                  '/images/creek.webp',
+                ]
+              }
+              flooring_description={
+                data.flooring_description ??
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+              }
+              amenities={
+                data.amenities ?? [
+                  {
+                    title: 'security',
+                    text: 'LOrem LOrem LOrem LOrem',
+                  },
+                  {
+                    title: 'Park',
+                    text: 'LOrem LOrem LOrem LOrem',
+                  },
+                  {
+                    title: 'Pool',
+                    text: 'LOrem LOrem LOrem LOrem',
+                  },
+                ]
+              }
             />
-            <div className="flex mt-[15vh]">
-              <div className="w-[40%] flex flex-col p-10 bg-darkButNotBlack">
+            <div className="flex flex-col md:flex-row mt-[15vh]">
+              <div className="w-full md:w-[40%] flex flex-col p-10 bg-darkButNotBlack">
                 <div className="flex ">
                   <figure className="relative w-[150px] h-[150px]">
                     <Image
@@ -292,7 +375,7 @@ const Property = () => {
                     <h2 className="revamp-font-optima text-white text-sm md:text-md">
                       {data.agentDesignation}
                     </h2>
-                    <p className='text-white '>{data.agentEmail}</p>
+                    <p className="text-white ">{data.agentEmail}</p>
                   </div>
                 </div>
                 <div className="p-10">
@@ -306,7 +389,7 @@ const Property = () => {
                 </div>
               </div>
               <GetIntouch
-                className="w-[60%] property-contact md:p-0 shadow-none md:pl-10"
+                className="w-full md:w-[60%] property-contact md:p-0 shadow-none md:pl-10"
                 placeholder={`Hey ${data.agentName},\nI'm interested in this property. Let's connect. ${url}`}
               />
             </div>
