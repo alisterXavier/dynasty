@@ -14,29 +14,6 @@ const Hero = ({ title, images, location }) => {
 
   useEffect(() => {
     if (loaded) {
-      gsap.fromTo(
-        '.fade-img',
-        {
-          opacity: 0,
-        },
-        { opacity: 1, duration: 1.5 }
-      );
-
-      gsap.fromTo(
-        '.property-hero-inner',
-        {
-          y: 0,
-        },
-        {
-          y: '-50%',
-          scrollTrigger: {
-            trigger: '.dynasty-real-estate',
-            start: 'top top',
-            scrub: true,
-          },
-        }
-      );
-
       setInterval(() => {
         handleNext();
       }, 5000);
@@ -180,12 +157,9 @@ const Details = ({
         <div className="flex flex-col md:flex-row justify-between">
           <div className="w-full md:w-[60%]">
             <h2 className="revamp-font-titi text-md my-2">Description</h2>
-            <StaggerPara
-              text={description}
-              className="stagger-para revamp-font-optima text-lg"
-              parent={'.property-details'}
-              start={'top 10%'}
-            />
+            <p className="stagger-para revamp-font-optima text-lg">
+              {description}
+            </p>
           </div>
 
           <div className="mt-5 w-full md:w-[35%]">
@@ -250,12 +224,7 @@ const FloorPlans = ({ images, description }) => {
         })}
       </div>
       <div className="flooring-plan-description mt-2 overflow-hidden">
-        <StaggerPara
-          text={description}
-          className="stagger-para revamp-font-optima text-lg"
-          parent={'.floor-plans'}
-          start={'100% bottom'}
-        />
+        <p className="stagger-para revamp-font-optima text-lg">{description}</p>
       </div>
     </div>
   );
