@@ -131,6 +131,7 @@ const Details = ({
           {location?.address}, {location.city}
         </p>
       </div>
+
       <div className="flex justify-between flex-col md:flex-row">
         <div className="flex flex-wrap md:flex-nowrap md:flex-row w-full md:w-[60%]">
           <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
@@ -275,9 +276,7 @@ const Amenities = ({ amenities }) => {
               <h2 className="revamp-font-titi text-sm md:text-md my-2">
                 {amenity.title}
               </h2>
-              <p className="revamp-font-optima text-xl md:text-xl">
-                {amenity.text}
-              </p>
+              <p className="revamp-font-optima text-lg">{amenity.text}</p>
             </div>
           );
         })}
@@ -291,7 +290,6 @@ const Property = () => {
   const id = query.get('id');
   const [data, setData] = useState();
   const [url, setUrl] = useState('');
-
   useEffect(() => {
     const getData = async () => {
       const res = await supabase
@@ -299,6 +297,7 @@ const Property = () => {
         .select()
         .eq('id', id)
         .single();
+      console.log(res.data);
       setData(res.data);
     };
     getData();
@@ -337,9 +336,7 @@ const Property = () => {
               size={data.size}
               flooring_images={
                 data.flooring_images ?? [
-                  '/images/creek.webp',
-                  '/images/creek.webp',
-                  '/images/creek.webp',
+                  '/images/creek.webp'
                 ]
               }
               flooring_description={
