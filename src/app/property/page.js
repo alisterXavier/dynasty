@@ -14,13 +14,13 @@ const Hero = ({ title, images, location }) => {
 
   useEffect(() => {
     if (loaded) {
-      gsap.fromTo(
-        '.fade-img',
-        {
-          opacity: 0,
-        },
-        { opacity: 1, duration: 1.5 }
-      );
+      // gsap.fromTo(
+      //   '.fade-img',
+      //   {
+      //     opacity: 0,
+      //   },
+      //   { opacity: 1, duration: 1.5 }
+      // );
 
       gsap.fromTo(
         '.property-hero-inner',
@@ -73,7 +73,7 @@ const Hero = ({ title, images, location }) => {
               <figure
                 key={i}
                 className={`absolute ${
-                  i === 0 ? 'z-10' : ''
+                  i === 0 ? 'z-10' : 'z-0'
                 } top-0 fade-img w-full h-full bg-darkButNotBlack`}
               >
                 <Image src={image} fill alt="" objectFit="contain" />
@@ -181,12 +181,9 @@ const Details = ({
         <div className="flex flex-col md:flex-row justify-between">
           <div className="w-full md:w-[60%]">
             <h2 className="revamp-font-titi text-md my-2">Description</h2>
-            <StaggerPara
-              text={description}
-              className="stagger-para revamp-font-optima text-lg"
-              parent={'.property-details'}
-              start={'top 10%'}
-            />
+            <p className="stagger-para revamp-font-optima text-lg">
+              {description}
+            </p>
           </div>
 
           <div className="mt-5 w-full md:w-[35%]">
@@ -251,12 +248,7 @@ const FloorPlans = ({ images, description }) => {
         })}
       </div>
       <div className="flooring-plan-description mt-2 overflow-hidden">
-        <StaggerPara
-          text={description}
-          className="stagger-para revamp-font-optima text-lg"
-          parent={'.floor-plans'}
-          start={'100% bottom'}
-        />
+        <p className="stagger-para revamp-font-optima text-lg">{description}</p>
       </div>
     </div>
   );
@@ -303,7 +295,7 @@ const Property = () => {
     getData();
     setUrl(window.location.origin + '' + window.location.pathname);
   }, [id]);
-
+  console.log(data)
   return (
     <div className="dynasty-real-estate min-h-screen w-screen">
       {data && (
@@ -323,23 +315,18 @@ const Property = () => {
               consultant={{
                 name: data.consultant.name,
                 designation: data.consultant.designation,
-              consultant={{
-                name: data.consultant.name,
-                designation: data.consultant.designation,
               }}
               description={data.description}
-              image={
-                data.images
-                  ? data.images[data.images.length - 2]
-                  : ['/images/creek.webp']
-              }
+              image={data.images}
               type={data.type}
               status={data.status}
               map={parse(`${data.map}`)}
               size={data.size}
               flooring_images={
                 data.flooring_images ?? [
-                  '/images/creek.webp'
+                  '/images/creek.webp',
+                  '/images/creek.webp',
+                  '/images/creek.webp',
                 ]
               }
               flooring_description={
