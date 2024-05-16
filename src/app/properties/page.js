@@ -42,7 +42,7 @@ const Properties = () => {
           // Fetch properties with a specific type
           ({ data, error } = await getDataWithType(type));
         }
-        const uniqueLocations = [...new Set(data.map((item) => item.location))];
+        const uniqueLocations = [...new Set(data.map((item) => item.location.city))];
         const uniqueDevelopers = [
           ...new Set(data.map((item) => item.developer)),
         ];
