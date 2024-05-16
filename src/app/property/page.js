@@ -11,7 +11,7 @@ import parse from 'html-react-parser';
 
 const Hero = ({ title, images, location }) => {
   const [loaded, setLoaded] = useState(false);
-  
+
   useEffect(() => {
     if (loaded) {
       gsap.fromTo(
@@ -42,7 +42,7 @@ const Hero = ({ title, images, location }) => {
       }, 5000);
     } else setLoaded(true);
   }, [loaded]);
-  
+
   const handleNext = () => {
     var curr = document.querySelector('.property-hero-images .z-10');
     var next = curr.nextSibling;
@@ -72,7 +72,9 @@ const Hero = ({ title, images, location }) => {
             return (
               <figure
                 key={i}
-                className="absolute z-10 top-0 fade-img w-full h-full"
+                className={`absolute ${
+                  i === 0 ? 'z-10' : ''
+                } top-0 fade-img w-full h-full bg-darkButNotBlack`}
               >
                 <Image src={image} fill alt="" objectFit="contain" />
               </figure>
@@ -86,7 +88,7 @@ const Hero = ({ title, images, location }) => {
             className="stagger-text revamp-font-optima text-2xl md:text-7xl"
           />
           <StaggerText
-            text={location?.general}
+            text={location?.city}
             parent={'.property-hero'}
             className="stagger-text revamp-font-optima text-xl md:text-3xl"
           />
@@ -105,7 +107,7 @@ const Hero = ({ title, images, location }) => {
 };
 
 const Details = ({
-  agent,
+  consultant,
   location,
   title,
   price,
@@ -117,7 +119,7 @@ const Details = ({
   size,
   type,
   map,
-  flooring_plans,
+  flooring_images,
   flooring_description,
   amenities,
 }) => {
@@ -126,9 +128,10 @@ const Details = ({
       <div className="my-5 ">
         <p className="revamp-font-optima text-lg md:text-4xl">{title}</p>
         <p className="revamp-font-optima text-lg md:text-2xl">
-          {location?.general}
+          {location?.address}, {location?.city}
         </p>
       </div>
+
       <div className="flex justify-between flex-col md:flex-row">
         <div className="flex flex-wrap md:flex-row w-full md:w-[60%]">
           <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
@@ -163,9 +166,9 @@ const Details = ({
           }}
         >
           <div>
-            <p className="revamp-font-optima text-white">{agent.name}</p>
+            <p className="revamp-font-optima text-white">{consultant.name}</p>
             <p className="revamp-font-optima text-white text-xs">
-              {agent.designation}
+              {consultant.designation}
             </p>
           </div>
           <p className="revamp-font-optima text-white text-xs hover:translate-x-1 transition-all">
@@ -177,12 +180,12 @@ const Details = ({
       <div className="mt-20 md:my-20 ">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="w-full md:w-[60%]">
-            <h2 className="revamp-font-titi text-md text-md my-2">
+            <h2 className="revamp-font-titi text-md sm:text-xl my-2">
               Description
             </h2>
             <StaggerPara
               text={description}
-              className="stagger-para revamp-font-optima text-xl md:text-xl"
+              className="stagger-para revamp-font-optima text-lg"
               parent={'.property-details'}
               start={'top 10%'}
             />
@@ -192,17 +195,13 @@ const Details = ({
             <div className="flex flex-wrap mb-5">
               <div className="w-[50%]">
                 <p className="text-sm md:text-md revamp-font-titi my-2">Type</p>
-                <p className="text-lg md:text-xl revamp-font-optima capitalize">
-                  {type}
-                </p>
+                <p className="text-lg revamp-font-optima capitalize">{type}</p>
               </div>
               <div className="w-[50%]">
                 <p className="text-sm md:text-md revamp-font-titi my-2">
                   Status
                 </p>
-                <p className="text-lg md:text-xl revamp-font-optima">
-                  {status}
-                </p>
+                <p className="text-lg revamp-font-optima">{status}</p>
               </div>
             </div>
             <div className="relative w-full h-full flex justify-center">
@@ -214,18 +213,21 @@ const Details = ({
         </div>
       </div>
 
-      {flooring_plans && flooring_description ? (
-        <FloorPans images={flooring_plans} description={flooring_description} />
+      {flooring_images && flooring_description ? (
+        <FloorPans
+          images={flooring_images}
+          description={flooring_description}
+        />
       ) : (
         <></>
       )}
       {amenities ? <Amenities amenities={amenities} /> : <></>}
 
-      <div className="property-loaction mt-5 md:mt-10 h-[50vh]">
-        <h2 className="text-xl md:text-3xl revamp-font-titi">Location</h2>
+      <div className="property-location mt-5 md:mt-10 h-[50vh]">
+        <h2 className="text-md sm:text-xl revamp-font-titi my-2">Location</h2>
         <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
-          <p className="revamp-font-optima text-xl md:text-xl">
-            {location?.exact ?? '-'}
+          <p className="revamp-font-optima text-lg">
+            {location?.address ?? '-'}
           </p>
         </div>
         {map}
@@ -237,7 +239,7 @@ const Details = ({
 const FloorPans = ({ images, description }) => {
   return (
     <div className="floor-plans">
-      <h2 className="text-xl md:text-3xl revamp-font-titi my-5">Floor Plans</h2>
+      <h2 className="text-md sm:text-xl revamp-font-titi my-2">Floor Plans</h2>
       <div className="flex flex-wrap">
         {images.map((image, i) => {
           return (
@@ -250,10 +252,10 @@ const FloorPans = ({ images, description }) => {
           );
         })}
       </div>
-      <div className="flooring-plan-description mt-10 overflow-hidden">
+      <div className="flooring-plan-description mt-2 overflow-hidden">
         <StaggerPara
           text={description}
-          className="stagger-para revamp-font-optima text-xl md:text-xl"
+          className="stagger-para revamp-font-optima text-lg"
           parent={'.floor-plans'}
           start={'100% bottom'}
         />
@@ -265,17 +267,18 @@ const FloorPans = ({ images, description }) => {
 const Amenities = ({ amenities }) => {
   return (
     <div className="property-amenities my-5">
-      <h2 className="text-xl md:text-3xl revamp-font-titi">Amenities</h2>
+      <h2 className="text-md sm:text-xl revamp-font-titi my-2">Amenities</h2>
       <div className="flex flex-wrap">
         {amenities.map((amenity, index) => {
           return (
-            <div key={index} className="w-[200px] my-2 md:my-0 md:w-[300px]">
+            <div
+              key={index}
+              className="w-[200px] my-2 md:my-0 md:w-[300px] border p-5 mr-5"
+            >
               <h2 className="revamp-font-titi text-sm md:text-md my-2">
                 {amenity.title}
               </h2>
-              <p className="revamp-font-optima text-xl md:text-xl">
-                {amenity.text}
-              </p>
+              <p className="revamp-font-optima text-lg">{amenity.text}</p>
             </div>
           );
         })}
@@ -287,9 +290,8 @@ const Amenities = ({ amenities }) => {
 const Property = () => {
   const query = useSearchParams();
   const id = query.get('id');
-  const [data, setData] = useState({});
+  const [data, setData] = useState();
   const [url, setUrl] = useState('');
-
   useEffect(() => {
     const getData = async () => {
       const res = await supabase
@@ -297,6 +299,7 @@ const Property = () => {
         .select()
         .eq('id', id)
         .single();
+      console.log(res.data);
       setData(res.data);
     };
     getData();
@@ -308,7 +311,7 @@ const Property = () => {
       {data && (
         <>
           <Hero
-            images={[data.images] ?? [""]}
+            images={data.images ?? ['/images/creek.webp']}
             title={data.title}
             location={data.location}
           />
@@ -319,18 +322,22 @@ const Property = () => {
               bathrooms={data.bathrooms}
               title={data.title}
               location={data.location}
-              agent={{
-                name: data.agentName,
-                designation: data.agentDesignation,
+              consultant={{
+                name: data.consultant.name,
+                designation: data.consultant.designation,
               }}
               description={data.description}
-              image={data.images}
+              image={
+                data.images
+                  ? data?.images[data?.images?.length - 2]
+                  : '/images/creek.webp'
+              }
               type={data.type}
               status={data.status}
               map={parse(`${data.map}`)}
               size={data.size}
-              flooring_plans={
-                data.flooring_plan ?? [
+              flooring_images={
+                data.flooring_images ?? [
                   '/images/creek.webp',
                   '/images/creek.webp',
                   '/images/creek.webp',
@@ -370,12 +377,12 @@ const Property = () => {
                   </figure>
                   <div className="flex flex-col justify-end">
                     <h2 className="revamp-font-optima text-white text-lg md:text-4xl">
-                      {data.agentName}
+                      {data.consultant.name}
                     </h2>
                     <h2 className="revamp-font-optima text-white text-sm md:text-md">
-                      {data.agentDesignation}
+                      {data.consultant.designation}
                     </h2>
-                    <p className="text-white ">{data.agentEmail}</p>
+                    {/* <p className="text-white ">{data.agentEmail}</p> */}
                   </div>
                 </div>
                 <div className="p-10">
@@ -390,7 +397,7 @@ const Property = () => {
               </div>
               <GetIntouch
                 className="w-full md:w-[60%] property-contact md:p-0 shadow-none md:pl-10"
-                placeholder={`Hey ${data.agentName},\nI'm interested in this property. Let's connect. ${url}`}
+                placeholder={`Hey ${data.consultant.name},\nI'm interested in this property. Let's connect. ${url}`}
               />
             </div>
           </div>

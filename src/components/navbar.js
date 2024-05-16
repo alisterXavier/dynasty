@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { HoveredLink, Menu, MenuItem, ProductItem } from './navbar-components';
-import { useSmallDeviceSize } from '@/utils/customHooks';
+import { useIsAdmin, useSmallDeviceSize } from '@/utils/customHooks';
 import gsap from 'gsap';
 
 const NavbarSmall = () => {
@@ -34,10 +34,10 @@ const NavbarSmall = () => {
           }}
           checked={isActive}
         />
-        <label class="toggle toggle2" for="checkbox2">
-          <div id="bar4" class="bars"></div>
-          <div id="bar5" class="bars"></div>
-          <div id="bar6" class="bars"></div>
+        <label className="toggle toggle2" htmlFor="checkbox2">
+          <div id="bar4" className="bars"></div>
+          <div id="bar5" className="bars"></div>
+          <div id="bar6" className="bars"></div>
         </label>
       </div>
       <nav
@@ -207,8 +207,8 @@ const NavbarLarge = ({ className }) => {
 
 const Navbar = () => {
   const isSmallScreen = useSmallDeviceSize();
-
-  return isSmallScreen ? <NavbarSmall /> : <NavbarLarge />;
+  const isAdmin = useIsAdmin();
+  return isSmallScreen || isAdmin ? <NavbarSmall /> : <NavbarLarge />;
 };
 
 export default Navbar;
