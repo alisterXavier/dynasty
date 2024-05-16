@@ -128,7 +128,7 @@ const Details = ({
       <div className="my-5 ">
         <p className="revamp-font-optima text-lg md:text-4xl">{title}</p>
         <p className="revamp-font-optima text-lg md:text-2xl">
-          {location?.address}, {location.city}
+          {location?.address}, {location?.city}
         </p>
       </div>
 
@@ -320,6 +320,9 @@ const Property = () => {
               bathrooms={data.bathrooms}
               title={data.title}
               location={data.location}
+              consultant={{
+                name: data.consultant.name,
+                designation: data.consultant.designation,
               consultant={{
                 name: data.consultant.name,
                 designation: data.consultant.designation,
