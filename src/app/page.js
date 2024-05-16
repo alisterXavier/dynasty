@@ -869,7 +869,7 @@ const Partners = () => {
 
 export const Footer = () => {
   return (
-    <div className="min-h-[60vh] flex justify-center items-center md:p-0 py-[40px] bg-[var(--bg)] mt-10">
+    <div className="min-h-[60vh] flex justify-center items-center md:p-0 py-[40px] bg-[var(--bg)]">
       <div className="w-[80%] md:h-[40%] h-full flex flex-wrap">
         <div className="flex flex-wrap md:w-[80%] w-full h-[100%]">
           <div className="md:w-[50%] w-full h-[100%] my-5">
