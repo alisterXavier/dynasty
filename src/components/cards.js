@@ -35,7 +35,7 @@ export const BentoGridItem = ({
       onClick={onClick}
     >
       <figure className="relative w-[100%] h-[200px] md:w-[100%] md:h-[70%] ">
-        <Image src={image} fill sizes="100%" alt="" />
+        <Image src={image} fill sizes="100%" alt="" objectFit='contain' />
       </figure>
       <div className="group-hover/bento:translate-x-2 transition duration-200 h-[100px]">
         {icon}

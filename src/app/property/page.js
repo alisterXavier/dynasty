@@ -132,7 +132,7 @@ const Details = ({
         </p>
       </div>
       <div className="flex justify-between flex-col md:flex-row">
-        <div className="flex flex-wrap md:flex-row w-full md:w-[60%]">
+        <div className="flex flex-wrap md:flex-nowrap md:flex-row w-full md:w-[60%]">
           <div className="w-[200px] my-2 md:my-0 md:w-[300px]">
             <h2 className="revamp-font-titi text-sm md:text-md my-2">Price</h2>
             <p className="revamp-font-optima text-xl md:text-xl">{price} AED</p>
@@ -176,7 +176,7 @@ const Details = ({
         </div>
       </div>
 
-      <div className="mt-20 md:my-20 ">
+      <div className="my-10">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="w-full md:w-[60%]">
             <h2 className="revamp-font-titi text-md my-2">Description</h2>
@@ -201,17 +201,17 @@ const Details = ({
                 <p className="text-lg revamp-font-optima">{status}</p>
               </div>
             </div>
-            <div className="relative w-full h-full flex justify-center">
-              <figure className="relative w-[100%] h-[80%] z-10">
+            {/* <div className="relative w-full h-full flex justify-center">
+              <figure className="relative w-[100%] h-[321px] z-10">
                 <Image src={image} alt="" fill objectFit="contain" />
               </figure>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
       {flooring_images && flooring_description ? (
-        <FloorPans
+        <FloorPlans
           images={flooring_images}
           description={flooring_description}
         />
@@ -233,7 +233,7 @@ const Details = ({
   );
 };
 
-const FloorPans = ({ images, description }) => {
+const FloorPlans = ({ images, description }) => {
   return (
     <div className="floor-plans">
       <h2 className="text-md sm:text-xl revamp-font-titi my-2">Floor Plans</h2>
@@ -242,7 +242,7 @@ const FloorPans = ({ images, description }) => {
           return (
             <figure
               key={i}
-              className="relative w-[100%] md:mx-5 md:w-[400px] h-[300px]"
+              className="relative w-[100%] md:mr-5 md:w-[390px] h-[300px] flex justify-start"
             >
               <Image className="" src={image} alt="" fill objectFit="contain" />
             </figure>
