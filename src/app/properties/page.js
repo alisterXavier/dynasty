@@ -7,6 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { Suspense } from 'react';
 import { supabase } from '@/utils/supabase';
+import { ListItemSecondaryAction } from '@mui/material';
 
 const Properties = () => {
   const query = useSearchParams();
@@ -115,9 +116,11 @@ const Properties = () => {
               </p>
             }
             header={<p className="text-darkButNotBlack">{item.type}</p>}
-            image={item.images}
+            image={item.images[0] ?? ''}
             price={<p className="text-darkButNotBlack">{item.price}</p>}
-            location={<p className="text-darkButNotBlack">{item.location}</p>}
+            location={
+              <p className="text-darkButNotBlack">{item.location.city}</p>
+            }
             className={`${
               i === 4 || i === 9 ? 'md:col-span-2 ' : ''
             }!bg-white border border-gray-200`}

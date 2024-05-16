@@ -278,7 +278,7 @@ const Properties = () => {
                   }
                   description={<p className="">{item.description}</p>}
                   header={<p className="">{item.type}</p>}
-                  image={item.images[0]}
+                  image={item.images[0] ?? ""}
                   price={<p className="">{item.price}</p>}
                   location={<p className="">{item.location.city}</p>}
                   onClick={() => {
