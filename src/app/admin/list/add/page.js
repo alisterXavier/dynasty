@@ -88,7 +88,7 @@ const Add = () => {
       title: property_title,
       size: size,
       description: property_description,
-      type: type.toLocaleLowercase(),
+      type: type.toLocaleLowerCase(),
       map: map,
       images: propertyImages,
       developer: developer,
