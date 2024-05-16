@@ -66,7 +66,7 @@ const Properties = () => {
 
     if (selectedLocation) {
       filteredProperties = filteredProperties.filter(
-        (property) => property.location === selectedLocation
+        (property) => property.location.city === selectedLocation
       );
     }
 
